@@ -1,4 +1,4 @@
-package ru.proximo
+package ru.proximo.schat
 
 /**
  * @author ${user.name}
