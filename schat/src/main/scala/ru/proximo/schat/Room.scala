@@ -1,6 +1,6 @@
 package ru.proximo.schat
 
-import collection.immutable.HashSet
+import scala.collection.mutable
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,9 +10,11 @@ import collection.immutable.HashSet
  */
 class Room {
 
-  val users:Set[User] = new HashSet[User]
+  private val users:mutable.Set[User] = new mutable.HashSet[User]()
 
   def addUser(user:User) {
-    users + user
+    users += user
   }
+
+  def getUsers = users
 }

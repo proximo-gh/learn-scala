@@ -8,8 +8,13 @@ object App {
   def foo(x : Array[String]) = x.foldLeft("")((a,b) => a + b)
   
   def main(args : Array[String]) {
-    println( "Hello World!" )
-    println("concat arguments = " + foo(args))
+    val room = new Room
+
+    room addUser(new User("Test1"))
+
+    room.addUser(new User("Test2"))
+
+    room.getUsers.foreach((user) => println(user.getName))
   }
 
 }

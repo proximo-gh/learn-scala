@@ -7,5 +7,5 @@ package ru.proximo.schat
  * Time: 12:50 AM
  */
 class User(name:String) {
-
+  def getName = name
 }
