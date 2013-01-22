@@ -11,10 +11,17 @@ import scala.collection.mutable
 class Room {
 
   private val users:mutable.Set[User] = new mutable.HashSet[User]()
+  private val messages = new mutable.ArrayBuffer[Message]()
 
   def addUser(user:User) {
     users += user
   }
 
   def getUsers = users
+
+  def addMessage(message:Message) {
+    messages += message
+  }
+
+  def getMessages = messages
 }
