@@ -17,11 +17,13 @@ class Room {
 
   def addUser(user:User) = users += ((user.getName, user))
 
+  def removeUser(name: String) = users remove name
+
   def getUsers = users.values
 
-  def addMessage(message:Message) = messages += message
+  def addMessage(message:Message) = if (users contains message.to) messages += message
 
   def getMessages = messages
 
-  def getMessagesForUser(name: String) = messages.filter(_.to == name)
+  def getMessagesForUser(name: String) = if (users contains name) messages.filter(_.to == name) else List()
 }
