@@ -20,4 +20,6 @@ class Room {
   def addMessage(message:Message) = messages += message
 
   def getMessages = messages
+
+  def getMessagesForUser(name: String) = messages.filter(_.to == name)
 }
