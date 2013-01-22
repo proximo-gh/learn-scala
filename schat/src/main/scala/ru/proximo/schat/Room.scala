@@ -1,6 +1,8 @@
 package ru.proximo.schat
 
 import scala.collection.mutable
+import collection.JavaConversions._
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,7 +12,7 @@ import scala.collection.mutable
  */
 class Room {
 
-  private val users:mutable.Map[String, User] = new mutable.HashMap[String, User]()
+  private val users:mutable.ConcurrentMap[String, User] = new ConcurrentHashMap[String, User]
   private val messages = new mutable.ArrayBuffer[Message]()
 
   def addUser(user:User) = users += ((user.getName, user))
