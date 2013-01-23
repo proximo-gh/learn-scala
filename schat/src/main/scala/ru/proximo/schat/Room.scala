@@ -3,6 +3,8 @@ package ru.proximo.schat
 import scala.collection.mutable
 import collection.JavaConversions._
 import java.util.concurrent.ConcurrentHashMap
+import math.Ordering
+import java.util.Date
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,5 +27,10 @@ class Room {
 
   def getMessages = messages
 
-  def getMessagesForUser(name: String) = if (users contains name) messages.filter(_.to == name) else List()
+  def getMessagesForUser(name: String): Seq[Message] = {
+    if (users contains name)
+      messages.filter(_.to == name).sortBy(_.date)
+    else
+      List()
+  }
 }
