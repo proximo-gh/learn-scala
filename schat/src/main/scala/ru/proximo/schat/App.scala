@@ -22,6 +22,7 @@ object App {
 
     println("All messages")
     room.addMessage(new Message("Hello", "Test1", "Test2", new Date()))
+    Thread.sleep(1000)
     room.addMessage(new Message("Hi", "Test2", "Test1", new Date()))
     room.addMessage(new Message("Hi again", "Test3", "Test2", new Date()))
 
