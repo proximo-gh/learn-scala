@@ -29,7 +29,7 @@ class Room {
 
   def getMessagesForUser(name: String): Seq[Message] = {
     if (users contains name)
-      messages.filter(_.to == name).sortBy(_.date)(Ordering[Date].reverse)
+      messages.filter(_.to == name).sortBy(_.date)
     else
       List()
   }
