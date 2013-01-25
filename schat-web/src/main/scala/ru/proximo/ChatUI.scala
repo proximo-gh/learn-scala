@@ -13,24 +13,17 @@ class ChatUI extends UI {
 
   def init(p1: VaadinRequest) {
     val layout: VerticalLayout = new VerticalLayout
-
-
     layout.setMargin(true)
-
 
     setContent(layout)
 
-
-
     val button: Button = new Button("Click Me")
-
 
     button.addClickListener(new Button.ClickListener {
       def buttonClick(event: Button.ClickEvent) {
         layout.addComponent(new Label("Thank you for clicking"))
       }
     })
-
 
     layout.addComponent(button)
   }
