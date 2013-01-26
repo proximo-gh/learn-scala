@@ -17,7 +17,7 @@ class Room {
   private val users:mutable.ConcurrentMap[String, User] = new ConcurrentHashMap[String, User]
   private val messages = new mutable.ArrayBuffer[Message]()
 
-  def addUser(user:User) = users += ((user.getName, user))
+  def addUser(user:User) : Unit = if (!users.contains(user.getName)) users += ((user.getName, user))
 
   def removeUser(name: String) = users remove name
 
