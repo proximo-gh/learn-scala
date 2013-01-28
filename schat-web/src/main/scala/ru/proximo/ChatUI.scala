@@ -1,6 +1,5 @@
 package ru.proximo
 
-import _root_.com.vaadin.data.fieldgroup.FieldGroup
 import _root_.com.vaadin.data.validator.StringLengthValidator
 import com.vaadin.server.VaadinRequest
 import _root_.com.vaadin.ui._
