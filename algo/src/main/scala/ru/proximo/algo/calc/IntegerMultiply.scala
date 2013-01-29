@@ -9,9 +9,7 @@ package ru.proximo.algo.calc
 object IntegerMultiply {
 
   def iterative(xArray: Array[Int], yArray : Array[Int]) : Array[Int] = {
-    val result = Array.fill(xArray.length + yArray.length) {
-      0
-    }
+    val result = Array.fill(xArray.length + yArray.length)(0)
 
     var i = result.length - 1
 
