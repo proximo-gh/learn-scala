@@ -21,7 +21,7 @@ object IntegerMultiply {
         val p = x * y
 
         if (p >= 10) {
-          result(i) = p / 10
+          result(i) = p % 10
           result(i - 1) += 1
         }
       })
