@@ -9,13 +9,24 @@ package ru.proximo.algo.calc
 object IntegerMultiply {
 
   def iterative(xArray: Array[Int], yArray : Array[Int]) : Array[Int] = {
-    val result = new Array[Int](math.max(xArray.length, yArray.length) + 1)
+    val result = Array.fill(xArray.length + yArray.length) {
+      0
+    }
+
+    var i = result.length - 1
 
     xArray.foreach((x: Int) => {
 
       yArray.foreach((y: Int) => {
+        val p = x * y
 
+        if (p >= 10) {
+          result(i) = p / 10
+          result(i - 1) += 1
+        }
       })
+
+      i -= 1
     })
 
     result
