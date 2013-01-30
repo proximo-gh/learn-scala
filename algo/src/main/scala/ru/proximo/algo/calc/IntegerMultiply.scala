@@ -27,9 +27,6 @@ object IntegerMultiply {
         else
           result(j) += p
 
-        result.foreach(print(_))
-        println()
-
         j -= 1
       })
 
@@ -43,5 +40,18 @@ object IntegerMultiply {
     val result = iterative(Array.apply(1, 1), Array.apply(1, 1))
 
     result.foreach(print(_))
+    println
+
+    var n = 0
+
+    val intResult = result.foldRight(0)((i: Int, sum: Int) => {
+      println("" + i + " " + sum)
+      val ret = sum + i + 10 ^ n
+
+      n += 1
+      ret
+    })
+
+    println("intResult = " + intResult)
   }
 }
