@@ -15,19 +15,33 @@ object IntegerMultiply {
     var i = result.length - 1
 
     xArray.foreach((x: Int) => {
+      var j = i
 
       yArray.foreach((y: Int) => {
         val p = x * y
 
         if (p >= 10) {
-          result(i) = p % 10
-          result(i - 1) += 1
+          result(j) += p % 10
+          result(j - 1) += p / 10
         }
+        else
+          result(j) += p
+
+        result.foreach(print(_))
+        println()
+
+        j -= 1
       })
 
       i -= 1
     })
 
     result
+  }
+
+  def main(args: Array[String]) {
+    val result = iterative(Array.apply(1, 1), Array.apply(1, 1))
+
+    result.foreach(print(_))
   }
 }
