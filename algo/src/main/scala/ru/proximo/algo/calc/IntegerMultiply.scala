@@ -40,7 +40,7 @@ object IntegerMultiply {
     val result = iterative(Array.apply(1, 1), Array.apply(1, 1))
 
     result.foreach(print(_))
-    println
+    println()
 
     var n = 0
 
