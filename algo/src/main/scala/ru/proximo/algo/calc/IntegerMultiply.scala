@@ -44,8 +44,7 @@ object IntegerMultiply {
 
     var n = 0
 
-    val intResult = result.foldRight(0)((i: Int, sum: Int) => {
-      println("i= " + i + " sum = " + sum)
+    val intResult = (result :\ 0)((i: Int, sum: Int) => {
       val ret = sum + (i * math.pow(10, n).toInt)
 
       n += 1
