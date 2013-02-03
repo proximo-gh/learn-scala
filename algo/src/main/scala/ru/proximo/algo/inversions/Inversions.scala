@@ -1,5 +1,7 @@
 package ru.proximo.algo.inversions
 
+import scala.io.Source
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,13 +11,8 @@ package ru.proximo.algo.inversions
  */
 object Inversions {
   def readFIle():Array[Int] = {
-    import scala.io.Source
-
     val lines = Source.fromFile("/home/proximo/Programming/Coursera/Algo/Week1/IntegerArray.txt").getLines()
-
-    val result = lines.map(_.toInt).toArray
-
-    result
+    lines.map(_.toInt).toArray
   }
 
   def main(args: Array[String]) {
