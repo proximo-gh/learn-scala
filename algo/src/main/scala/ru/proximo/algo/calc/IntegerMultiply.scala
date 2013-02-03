@@ -1,5 +1,7 @@
 package ru.proximo.algo.calc
 
+import scala.collection.mutable
+
 /**
  * Created with IntelliJ IDEA.
  * User: proximo
@@ -42,15 +44,38 @@ object IntegerMultiply {
     result.foreach(print(_))
     println()
 
+    val intResult: Int = pack(result)
+
+    println("intResult = " + intResult)
+
+    unpack(123)
+
+    unpack(3625654)
+  }
+
+  def pack(arr: Array[Int]): Int = {
     var n = 0
 
-    val intResult = (result :\ 0)((i: Int, sum: Int) => {
+    (arr :\ 0)((i: Int, sum: Int) => {
       val ret = sum + (i * math.pow(10, n).toInt)
 
       n += 1
       ret
     })
+  }
 
-    println("intResult = " + intResult)
+  def unpack(num : Int): Array[Int] = {
+    var n = num
+
+    var s = List[Int]()
+
+    while (n > 0) {
+      s ::= (n % 10)
+      n /= 10
+    }
+
+    println(s)
+
+    s.toArray
   }
 }
