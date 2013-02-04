@@ -22,7 +22,7 @@ object Inversions {
     def countPart(from : Int, to : Int) {
       println("counting parts (" + from + ", " + to + ")")
       (to - from) match {
-        case dif if dif < 0 =>
+        case dif if dif <= 0 =>
         case 1 => checkAndSwap(from, to)
         case _ => {
           val mid = from + (to - from) / 2
