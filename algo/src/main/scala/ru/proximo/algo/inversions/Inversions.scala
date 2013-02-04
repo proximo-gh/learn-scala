@@ -39,6 +39,8 @@ object Inversions {
       var i = from
       var j = from  + (to - from) / 2 + 1
 
+      println("merging from " + from + " to, i = " + i + " j = " + j)
+
       val helper = Array(to - from)
 
       for (i <- 0 until helper.length)
