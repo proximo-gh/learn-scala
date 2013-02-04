@@ -37,11 +37,23 @@ object Inversions {
 
     def merge(from : Int, to : Int) {
       var i = from
-      var j = to / 2 + 1
+      var j = from  + (to - from) / 2 + 1
 
       val helper = Array(to - from)
 
-      input.copyToArray(helper, from, to)
+      for (i <- 0 until helper.length)
+        helper(i) = input(from + i)
+
+      for (k <- from until to) {
+        if (helper(i) <= helper(j)) {
+          input(k) = helper(i)
+          i += 1
+        }
+        else {
+          input(k) = helper(j)
+          j += 1
+        }
+      }
     }
 
     def checkAndSwap(from: Int, to: Int) {
@@ -53,8 +65,6 @@ object Inversions {
       lrc += 1
       }
     }
-
-    var helper = input.clone()
 
     countPart(0, input.length)
 
