@@ -68,7 +68,12 @@ object Inversions {
 
     println(array(100))
 
-    val invCount = countInversions(Array(1, 3, 5, 6, 4, 2))
+    val input = Array(1, 6, 5, 3, 4, 2)
+    println(input.mkString(", "))
+
+    val invCount = countInversions(input)
+
+    println(input.mkString(", "))
 
     println("invCount = " + invCount)
   }
