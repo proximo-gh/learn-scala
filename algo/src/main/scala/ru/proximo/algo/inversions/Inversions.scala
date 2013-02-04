@@ -127,7 +127,7 @@ object Inversions {
     println("invCount = " + invCount)
   }
 
-  val log = true
+  val log = false
 
   def nop(a : Any){}
 
