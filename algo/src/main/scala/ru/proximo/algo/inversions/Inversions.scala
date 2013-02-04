@@ -15,9 +15,9 @@ object Inversions {
     lines.map(_.toInt).toArray
   }
 
-  def countInversions(input: Array[Int]): Int = {
-    var lrc = 0
-    var sc = 0
+  def countInversions(input: Array[Int]): BigInt = {
+    var lrc = BigInt(0)
+    var sc = BigInt(0)
 
     def countPart(from: Int, to: Int) {
       pln("counting parts (" + from + ", " + to + ")")
@@ -120,7 +120,7 @@ object Inversions {
     val input = Array(1, 6, 5, 3, 4, 2, 7, 8)
     printArray(input)
 
-    val invCount = countInversions(input)
+    val invCount = countInversions(array)
 
     printArray(input)
 
