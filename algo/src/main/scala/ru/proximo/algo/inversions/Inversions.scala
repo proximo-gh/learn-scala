@@ -47,9 +47,9 @@ object Inversions {
 
       println("merging from " + from + " to " + to + ", i = " + i + " j = " + j)
 
-      val helper = new Array[Int](to - from)
+      val helper = new Array[Int](to - from + 1)
 
-      for (k <- (0 to helper.length))
+      for (k <- (0 until helper.length))
         helper(k) = input(from + k)
 
       print("helpr: ");
