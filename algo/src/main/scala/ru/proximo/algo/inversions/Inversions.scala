@@ -10,16 +10,16 @@ import scala.io.Source
  * Time: 7:22 PM
  */
 object Inversions {
-  def readFIle():Array[Int] = {
+  def readFIle(): Array[Int] = {
     val lines = Source.fromFile("/home/proximo/Programming/Coursera/Algo/Week1/IntegerArray.txt").getLines()
     lines.map(_.toInt).toArray
   }
 
-  def countInversions(input: Array[Int]):Int = {
+  def countInversions(input: Array[Int]): Int = {
     var lrc = 0
     var sc = 0
 
-    def countPart(from : Int, to : Int) {
+    def countPart(from: Int, to: Int) {
       println("counting parts (" + from + ", " + to + ")")
       (to - from) match {
         case dif if dif <= 0 =>
@@ -27,25 +27,33 @@ object Inversions {
         case _ => {
           val mid = from + (to - from) / 2
 
-          print("l "); countPart(from, mid)
-          print("r "); countPart(mid + 1, to)
+          print("l ");
+          countPart(from, mid)
+          print("r ");
+          countPart(mid + 1, to)
 
           merge(from, to)
         }
       }
+
+      print("count: ");
+      printArray(input)
     }
 
-    def merge(from : Int, to : Int) {
+    def merge(from: Int, to: Int) {
       var i = from
       val mid = from + (to - from) / 2
       var j = mid + 1
 
       println("merging from " + from + " to " + to + ", i = " + i + " j = " + j)
 
-      val helper = Array(to - from)
+      val helper = new Array[Int](to - from)
 
       for (k <- 0 until helper.length)
         helper(k) = input(from + k)
+
+      print("helpr: ");
+      printArray(input)
 
       for (k <- from until to) {
         if (i < mid && j < to) {
@@ -58,17 +66,20 @@ object Inversions {
             j += 1
           }
         }
-
-        while(i < mid) {
-          input(i) = helper(i - from)
-          i += 1
-        }
-
-        while (j < to) {
-          input(j) = helper(j - from)
-          j += 1
-        }
       }
+
+      while (i < mid) {
+        input(i) = helper(i - from)
+        i += 1
+      }
+
+      while (j < to) {
+        input(j) = helper(j - from)
+        j += 1
+      }
+
+      print("merge: ");
+      printArray(input)
     }
 
     def checkAndSwap(from: Int, to: Int) {
@@ -77,7 +88,7 @@ object Inversions {
         input(from) = input(to)
         input(to) = old
 
-      lrc += 1
+        lrc += 1
       }
     }
 
