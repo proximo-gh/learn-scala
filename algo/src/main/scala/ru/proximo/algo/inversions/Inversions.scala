@@ -55,7 +55,7 @@ object Inversions {
       print("helpr: ");
       printArray(input)
 
-      var k:Int = 0
+      var k:Int = from
 
       while (i <= mid && j <= to) {
         val left = helper(i - from)
