@@ -1,7 +1,6 @@
 package ru.proximo.algo.inversions
 
 import scala.io.Source
-import annotation.tailrec
 
 
 /**
@@ -21,23 +20,23 @@ object Inversions {
     var sc = 0
 
     def countPart(from: Int, to: Int) {
-      println("counting parts (" + from + ", " + to + ")")
+      pln("counting parts (" + from + ", " + to + ")")
       (to - from) match {
         case dif if dif <= 0 =>
         case 1 => checkAndSwap(from, to)
         case _ => {
           val mid = from + (to - from) / 2
 
-          print("l ");
+          pl("l ");
           countPart(from, mid)
-          print("r ");
+          pl("r ");
           countPart(mid + 1, to)
 
           merge(from, to)
         }
       }
 
-      print("count: ");
+      pln("count: ");
       printArray(input)
     }
 
@@ -46,14 +45,14 @@ object Inversions {
       val mid:Int = from + (to - from) / 2
       var j:Int = mid + 1
 
-      println("merging from " + from + " to " + to + ", i = " + i + " j = " + j)
+      pln("merging from " + from + " to " + to + ", i = " + i + " j = " + j)
 
       val helper = new Array[Int](to - from + 1)
 
       for (k <- (0 until helper.length))
         helper(k) = input(from + k)
 
-      print("helpr: ");
+      pl("helpr: ");
       printArray(input)
 
       var k:Int = from
@@ -71,8 +70,10 @@ object Inversions {
           j += 1
           sc += mid - i + 1
 
+/*
           printf("moving %d, sc by %d", right, mid - i + 1)
           println()
+*/
         }
 
         k += 1
@@ -90,7 +91,7 @@ object Inversions {
         k += 1
       }
 
-      print("merge: ");
+      pl("merge: ");
       printArray(input)
     }
 
@@ -114,7 +115,7 @@ object Inversions {
 
     println(array.length + " of elements read")
 
-    println(array(100))
+    pln(array(100))
 
     val input = Array(1, 6, 5, 3, 4, 2, 7, 8)
     printArray(input)
@@ -126,7 +127,26 @@ object Inversions {
     println("invCount = " + invCount)
   }
 
+  val log = true
+
+  def nop(a : Any){}
+
+  def pln: (Any) => Unit = {
+    if (log)
+      println
+    else
+      nop
+  }
+
+  def pl: (Any) => Unit = {
+    if (log)
+      print
+    else
+      nop
+  }
+
   def printArray(input: Array[Int]) {
-    println(input.mkString(", "))
+    if (log)
+      pln(input.mkString(", "))
   }
 }
