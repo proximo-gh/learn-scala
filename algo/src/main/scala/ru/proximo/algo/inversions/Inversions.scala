@@ -1,6 +1,7 @@
 package ru.proximo.algo.inversions
 
 import scala.io.Source
+import annotation.tailrec
 
 
 /**
@@ -68,6 +69,10 @@ object Inversions {
         else {
           input(k) = right
           j += 1
+          sc += mid - i + 1
+
+          printf("moving %d, sc by %d", right, mid - i + 1)
+          println()
         }
 
         k += 1
@@ -111,7 +116,7 @@ object Inversions {
 
     println(array(100))
 
-    val input = Array(1, 6, 5, 3, 4, 2, 9, 7)
+    val input = Array(1, 6, 5, 3, 4, 2, 7, 8)
     printArray(input)
 
     val invCount = countInversions(input)
