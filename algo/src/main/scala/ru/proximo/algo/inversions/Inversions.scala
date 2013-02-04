@@ -39,9 +39,9 @@ object Inversions {
       var i = from
       var j = to / 2 + 1
 
-      for (k <- from until to) {
+      val helper = Array(to - from)
 
-      }
+      input.copyToArray(helper, from, to)
     }
 
     def checkAndSwap(from: Int, to: Int) {
@@ -50,7 +50,7 @@ object Inversions {
         input(from) = input(to)
         input(to) = old
 
-        lrc += 1
+      lrc += 1
       }
     }
 
@@ -69,12 +69,16 @@ object Inversions {
     println(array(100))
 
     val input = Array(1, 6, 5, 3, 4, 2)
-    println(input.mkString(", "))
+    printArray(input)
 
     val invCount = countInversions(input)
 
-    println(input.mkString(", "))
+    printArray(input)
 
     println("invCount = " + invCount)
+  }
+
+  def printArray(input: Array[Int]) {
+    println(input.mkString(", "))
   }
 }
