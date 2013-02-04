@@ -41,31 +41,33 @@ object Inversions {
     }
 
     def merge(from: Int, to: Int) {
-      var i = from
-      val mid = from + (to - from) / 2
-      var j = mid + 1
+      var i:Int = from
+      val mid:Int = from + (to - from) / 2
+      var j:Int = mid + 1
 
       println("merging from " + from + " to " + to + ", i = " + i + " j = " + j)
 
       val helper = new Array[Int](to - from)
 
-      for (k <- 0 until helper.length)
+      for (k <- (0 until helper.length))
         helper(k) = input(from + k)
 
       print("helpr: ");
       printArray(input)
 
-      for (k <- from until to) {
-        if (i < mid && j < to) {
-          if (helper(i - from) <= helper(j - from)) {
-            input(k) = helper(i - from)
-            i += 1
-          }
-          else {
-            input(k) = helper(j - from)
-            j += 1
-          }
+      var k:Int = 0
+
+      while (i < mid && j < to) {
+        if (helper(i - from) <= helper(j - from)) {
+          input(k) = helper(i - from)
+          i += 1
         }
+        else {
+          input(k) = helper(j - from)
+          j += 1
+        }
+
+        k += 1
       }
 
       while (i < mid) {
