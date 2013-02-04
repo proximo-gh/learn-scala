@@ -44,17 +44,17 @@ object Inversions {
 
       val helper = Array(to - from)
 
-      for (i <- 0 until helper.length)
-        helper(i) = input(from + i)
+      for (k <- 0 until helper.length)
+        helper(k) = input(from + k)
 
       for (k <- from until to) {
         if (i < mid && j < to) {
-          if (helper(i) <= helper(j)) {
-            input(k) = helper(i)
+          if (helper(i - from) <= helper(j - from)) {
+            input(k) = helper(i - from)
             i += 1
           }
           else {
-            input(k) = helper(j)
+            input(k) = helper(j - from)
             j += 1
           }
         }
