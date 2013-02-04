@@ -57,27 +57,32 @@ object Inversions {
 
       var k:Int = 0
 
-      while (i < mid && j < to) {
-        if (helper(i - from) <= helper(j - from)) {
-          input(k) = helper(i - from)
+      while (i <= mid && j < to) {
+        val left = helper(i - from)
+        val right = helper(j - from)
+
+        if (left <= right) {
+          input(k) = left
           i += 1
         }
         else {
-          input(k) = helper(j - from)
+          input(k) = right
           j += 1
         }
 
         k += 1
       }
 
-      while (i < mid) {
-        input(i) = helper(i - from)
+      while (i <= mid) {
+        input(k) = helper(i - from)
         i += 1
+        k += 1
       }
 
       while (j < to) {
         input(j) = helper(j - from)
         j += 1
+        k += 1
       }
 
       print("merge: ");
