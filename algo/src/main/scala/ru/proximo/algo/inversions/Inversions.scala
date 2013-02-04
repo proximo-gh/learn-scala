@@ -49,7 +49,7 @@ object Inversions {
 
       val helper = new Array[Int](to - from)
 
-      for (k <- (0 until helper.length))
+      for (k <- (0 to helper.length))
         helper(k) = input(from + k)
 
       print("helpr: ");
@@ -57,7 +57,7 @@ object Inversions {
 
       var k:Int = 0
 
-      while (i <= mid && j < to) {
+      while (i <= mid && j <= to) {
         val left = helper(i - from)
         val right = helper(j - from)
 
@@ -79,7 +79,7 @@ object Inversions {
         k += 1
       }
 
-      while (j < to) {
+      while (j <= to) {
         input(j) = helper(j - from)
         j += 1
         k += 1
@@ -99,7 +99,7 @@ object Inversions {
       }
     }
 
-    countPart(0, input.length)
+    countPart(0, input.length - 1)
 
     lrc + sc
   }
@@ -111,7 +111,7 @@ object Inversions {
 
     println(array(100))
 
-    val input = Array(1, 6, 5, 3, 4, 2)
+    val input = Array(1, 6, 5, 3, 4, 2, 9, 7)
     printArray(input)
 
     val invCount = countInversions(input)
