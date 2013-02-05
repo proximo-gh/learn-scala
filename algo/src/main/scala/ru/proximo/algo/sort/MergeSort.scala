@@ -11,14 +11,14 @@ import collection.mutable.ListBuffer
 object MergeSort {
 
 
-  def sort(input: List[Int]) : List[Int] = {
+  def sort(input: List[Int]): List[Int] = {
 
     def merge(left: List[Int], right: List[Int]): List[Int] = {
       var l = left
       var r = right
       var result: List[Int] = Nil
 
-      while(!l.isEmpty && !r.isEmpty) {
+      while (!l.isEmpty && !r.isEmpty) {
         if (l.head <= r.head) {
           result ::= l.head
           l = l.tail
@@ -36,26 +36,26 @@ object MergeSort {
     }
 
     def sortPart(input: List[Int]): List[Int] = {
-        input.size match {
-          case 0 | 1 => input
-          case _ => {
-            val (left, right) = input.splitAt(input.size / 2)
+      input.size match {
+        case 0 | 1 => input
+        case _ => {
+          val (left, right) = input.splitAt(input.size / 2)
 
-            merge(sortPart(left), sortPart(right))
-          }
+          merge(sortPart(left), sortPart(right))
         }
+      }
     }
 
     sortPart(input)
   }
 
   def main(args: Array[String]) {
-    val r = sort(List(4, 2, 5, 1, 6, 7, 9, 8))
+    val r = sort(List(4, 2, 5, 1, 6, 7, 9, 8, 3, 34, 56, 63, 2, 345, 36536, 2, 7657, 247, 8768, 5673))
 
     println(r)
   }
 
-  def sort(input: Array[Int]) : Array[Int] = {
+  def sort(input: Array[Int]): Array[Int] = {
 
     def checkAndSwap(from: Int, to: Int) {
       if (input(from) > input(to)) {
@@ -65,7 +65,7 @@ object MergeSort {
       }
     }
 
-    def merge(from : Int, to : Int) {
+    def merge(from: Int, to: Int) {
       var i = from
       var j = to / 2 + 1
 
@@ -74,7 +74,7 @@ object MergeSort {
       }
     }
 
-    def sortPart(from : Int, to : Int) {
+    def sortPart(from: Int, to: Int) {
       (to - from) match {
         case 1 => checkAndSwap(from, to)
         case 0 =>
