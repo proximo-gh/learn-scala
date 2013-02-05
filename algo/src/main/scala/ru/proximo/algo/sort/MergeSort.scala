@@ -36,10 +36,11 @@ object MergeSort {
     }
 
     def sortPart(input: List[Int]): List[Int] = {
-      input.size match {
+      val size = input.size
+      size match {
         case 0 | 1 => input
         case _ => {
-          val (left, right) = input.splitAt(input.size / 2)
+          val (left, right) = input.splitAt(size / 2)
 
           merge(sortPart(left), sortPart(right))
         }
