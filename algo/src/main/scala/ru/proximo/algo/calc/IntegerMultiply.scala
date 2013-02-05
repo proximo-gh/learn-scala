@@ -1,7 +1,5 @@
 package ru.proximo.algo.calc
 
-import scala.collection.mutable
-
 /**
  * Created with IntelliJ IDEA.
  * User: proximo

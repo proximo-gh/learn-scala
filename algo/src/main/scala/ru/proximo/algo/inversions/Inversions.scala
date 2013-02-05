@@ -11,7 +11,8 @@ import scala.io.Source
  */
 object Inversions {
   def readFIle(): Array[Int] = {
-    val lines = Source.fromFile("/home/proximo/Programming/Coursera/Algo/Week1/IntegerArray.txt").getLines()
+    //gistfile1.txt - 2507223936
+    val lines = Source.fromInputStream(getClass.getClassLoader.getResourceAsStream("IntegerArray.txt")).getLines()
     lines.map(_.toInt).toArray
   }
 
@@ -27,16 +28,16 @@ object Inversions {
         case _ => {
           val mid = from + (to - from) / 2
 
-          pl("l ");
+          pl("l ")
           countPart(from, mid)
-          pl("r ");
+          pl("r ")
           countPart(mid + 1, to)
 
           merge(from, to)
         }
       }
 
-      pln("count: ");
+      pln("count: ")
       printArray(input)
     }
 
@@ -52,7 +53,7 @@ object Inversions {
       for (k <- (0 until helper.length))
         helper(k) = input(from + k)
 
-      pl("helpr: ");
+      pl("helpr: ")
       printArray(input)
 
       var k:Int = from
@@ -91,7 +92,7 @@ object Inversions {
         k += 1
       }
 
-      pl("merge: ");
+      pl("merge: ")
       printArray(input)
     }
 
@@ -117,7 +118,8 @@ object Inversions {
 
     pln(array(100))
 
-    val input = Array(1, 6, 5, 3, 4, 2, 7, 8)
+    val input = Array(1,3,5,2,4,6)
+//    val input = Array(1, 6, 5, 3, 4, 2, 7, 8)
     printArray(input)
 
     val invCount = countInversions(array)
