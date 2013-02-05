@@ -1,5 +1,7 @@
 package ru.proximo.algo.sort
 
+import collection.mutable.ListBuffer
+
 /**
  * Created with IntelliJ IDEA.
  * User: proximo
@@ -7,6 +9,52 @@ package ru.proximo.algo.sort
  * Time: 11:50 PM
  */
 object MergeSort {
+
+
+  def sort(input: List[Int]) : List[Int] = {
+
+    def merge(left: List[Int], right: List[Int]): List[Int] = {
+      var l = left
+      var r = right
+      var result: List[Int] = Nil
+
+      while(!l.isEmpty && !r.isEmpty) {
+        if (l.head <= r.head) {
+          result ::= l.head
+          l = l.tail
+        }
+        else {
+          result ::= r.head
+          r = r.tail
+        }
+      }
+
+      l.foreach(result ::= _)
+      r.foreach(result ::= _)
+
+      result.reverse
+    }
+
+    def sortPart(input: List[Int]): List[Int] = {
+        input.size match {
+          case 0 | 1 => input
+          case _ => {
+            val (left, right) = input.splitAt(input.size / 2)
+
+            merge(sortPart(left), sortPart(right))
+          }
+        }
+    }
+
+    sortPart(input)
+  }
+
+  def main(args: Array[String]) {
+    val r = sort(List(4, 2, 5, 1, 6, 7, 9, 8))
+
+    println(r)
+  }
+
   def sort(input: Array[Int]) : Array[Int] = {
 
     def checkAndSwap(from: Int, to: Int) {
