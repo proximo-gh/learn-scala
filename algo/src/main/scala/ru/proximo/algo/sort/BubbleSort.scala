@@ -21,7 +21,7 @@ object BubbleSort {
   }
 
   def main(args: Array[String]) {
-    val sorted = bubble(Array(4, 5, 6,1, 2,9,3, 7,8))
+    val sorted = bubble(Array(4, 5, 6, 1, 2, 9, 3, 7, 8))
 
     println(sorted.mkString(", "))
   }
