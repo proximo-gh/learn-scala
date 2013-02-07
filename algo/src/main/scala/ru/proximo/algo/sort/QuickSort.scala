@@ -6,6 +6,8 @@ package ru.proximo.algo.sort
  * Date: 2/6/13
  * Time: 11:17 PM
  */
-object QuickSort {
-
+object QuickSort extends Sort {
+  def sort(a: Array[Int]): Array[Int] = {
+    a
+  }
 }

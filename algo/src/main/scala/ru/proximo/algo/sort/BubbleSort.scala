@@ -6,9 +6,22 @@ package ru.proximo.algo.sort
  * Date: 2/6/13
  * Time: 11:34 PM
  */
-object BubbleSort extends ArrayGen {
+object BubbleSort extends Sort with ArrayGen {
 
-  def bubble(a: Array[Int]): Array[Int] = {
+  def someOtherSort(a: Array[Int]): Array[Int] = {
+    val n = a.length
+
+    for (i <- 0 until n - 1; j <- i + 1 until n)
+      if (a(i) > a(j)) {
+        val tmp = a(j)
+        a(j) = a(i)
+        a(i) = tmp
+      }
+    a
+  }
+
+
+  override def sort(a: Array[Int]): Array[Int] = {
     val n = a.length
 
     for (i <- (n - 1) to 2 by -1; j <- 0 until i)
@@ -35,7 +48,7 @@ object BubbleSort extends ArrayGen {
     print("array = ")
     printA(a)
 
-    val s = bubble(a)
+    val s = sort(a)
     print("sortd = ")
     printA(s)
   }

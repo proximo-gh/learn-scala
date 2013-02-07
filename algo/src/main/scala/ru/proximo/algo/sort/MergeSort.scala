@@ -1,15 +1,12 @@
 package ru.proximo.algo.sort
 
-import collection.mutable.ListBuffer
-
 /**
  * Created with IntelliJ IDEA.
  * User: proximo
  * Date: 1/31/13
  * Time: 11:50 PM
  */
-object MergeSort {
-
+object MergeSort extends Sort {
 
   def sort(input: List[Int]): List[Int] = {
 
