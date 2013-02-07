@@ -8,6 +8,14 @@ package ru.proximo.algo.sort
  */
 object QuickSort extends Sort {
   def sort(a: Array[Int]): Array[Int] = {
+    def pivot(l: Int, r: Int): Int = {
+      (r - l) / 2
+    }
+
+    def partition(l: Int, r: Int) {
+
+    }
+
     a
   }
 }
