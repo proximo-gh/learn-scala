@@ -1,5 +1,8 @@
 package ru.proximo.algo.sort
 
+import scala.math
+import util.Random
+
 /**
  * Created with IntelliJ IDEA.
  * User: proximo
@@ -11,18 +14,38 @@ object BubbleSort {
   def bubble(a: Array[Int]): Array[Int] = {
     val n = a.length
 
-    for (i <- 0 until n - 1; j <- i + 1 until n)
-      if (a(i) > a(j)) {
+    for (i <- 0 until (n - 2); j <- i until (n - 1))
+      if (a(j) > a(j + 1)) {
         val tmp = a(j)
-        a(j) = a(i)
-        a(i) = tmp
+        a(j) = a(j + 1)
+        a(j + 1) = tmp
       }
     a
   }
 
-  def main(args: Array[String]) {
-    val sorted = bubble(Array(4, 5, 6, 1, 2, 9, 3, 7, 8))
+  def generate(n: Int) = {
+    Seq.fill(n) {Random.nextInt(n)}.toArray
+  }
 
-    println(sorted.mkString(", "))
+  def main(args: Array[String]) {
+    generateSortPrint(10)
+    generateSortPrint(20)
+    generateSortPrint(25)
+    generateSortPrint(25)
+    generateSortPrint(35)
+    generateSortPrint(50)
+  }
+
+  def generateSortPrint(n: Int) {
+    val a = generate(n)
+    printA(a)
+
+    val s = bubble(a)
+
+    printA(s)
+  }
+
+  def printA(a: Array[Int]) {
+    println(a.mkString(", "))
   }
 }
