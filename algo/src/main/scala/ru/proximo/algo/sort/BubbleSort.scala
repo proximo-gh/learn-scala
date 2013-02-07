@@ -1,15 +1,12 @@
 package ru.proximo.algo.sort
 
-import scala.math
-import util.Random
-
 /**
  * Created with IntelliJ IDEA.
  * User: proximo
  * Date: 2/6/13
  * Time: 11:34 PM
  */
-object BubbleSort {
+object BubbleSort extends ArrayGen {
 
   def bubble(a: Array[Int]): Array[Int] = {
     val n = a.length
@@ -23,9 +20,6 @@ object BubbleSort {
     a
   }
 
-  def generate(n: Int) = {
-    Seq.fill(n) {Random.nextInt(n)}.toArray
-  }
 
   def main(args: Array[String]) {
     generateSortPrint(10)
