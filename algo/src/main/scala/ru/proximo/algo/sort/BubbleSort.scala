@@ -14,7 +14,7 @@ object BubbleSort {
   def bubble(a: Array[Int]): Array[Int] = {
     val n = a.length
 
-    for (i <- 0 until (n - 2); j <- i until (n - 1))
+    for (i <- (n - 1) to 2 by -1; j <- 0 until i)
       if (a(j) > a(j + 1)) {
         val tmp = a(j)
         a(j) = a(j + 1)
@@ -38,10 +38,11 @@ object BubbleSort {
 
   def generateSortPrint(n: Int) {
     val a = generate(n)
+    print("array = ")
     printA(a)
 
     val s = bubble(a)
-
+    print("sortd = ")
     printA(s)
   }
 
