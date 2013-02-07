@@ -12,7 +12,7 @@ object QuickSort extends Sort {
       (r - l) / 2
     }
 
-    def partition(l: Int, r: Int) {
+    def partition(l: Int, r: Int, p: Int) {
 
     }
 
