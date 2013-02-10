@@ -27,6 +27,8 @@ public class Percolation {
     public void open(int i, int j) {
         if(isOpen(i, j))
             return;
+
+        grid[i][j] = State.OPEN;
     }
 
     // is site (row i, column j) open?
@@ -54,7 +56,21 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
-        return false;
+
+        for (int i = 0; i < n; i++) {
+            boolean hasFull = false;
+
+            for (int j = 0; j < n; j++)
+                if (isFull(i, j)) {
+                    hasFull = true;
+                    break;
+                }
+
+            if (!hasFull)
+                return false;
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
