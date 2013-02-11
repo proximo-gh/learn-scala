@@ -19,8 +19,8 @@ public class Percolation {
     public State[][] getGrid() {
         State[][] result = new State[n][n];
 
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 State state;
 
                 if (!isOpen(i, j))
