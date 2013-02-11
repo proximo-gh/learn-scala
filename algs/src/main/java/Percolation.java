@@ -12,10 +12,6 @@ public class Percolation {
 
     private final boolean full[];
 
-    public int getN() {
-        return n;
-    }
-
     public State[][] getGrid() {
         State[][] result = new State[n][n];
 
