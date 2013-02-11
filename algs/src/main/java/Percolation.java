@@ -1,14 +1,22 @@
 public class Percolation {
 
-    private static enum State {
+    public static enum State {
         BLOCKED,
         OPEN,
         FULL
     }
 
-    private int n;
+    private final int n;
 
     private final State[][] grid;
+
+    public int getN() {
+        return n;
+    }
+
+    public State[][] getGrid() {
+        return grid;
+    }
 
     private final WeightedQuickUnionUF uf;
 
@@ -34,11 +42,11 @@ public class Percolation {
 
         grid[i][j] = i == 0 ? State.FULL : State.OPEN;
 
-        if (i > 1)
+        if (i > 0)
             checkAndUnion(i, j, i - 1, j);
         if (i < n - 1)
             checkAndUnion(i, j, i + 1, j);
-        if (j > 1)
+        if (j > 0)
             checkAndUnion(i, j, i, j - 1);
         if (j < n - 1)
             checkAndUnion(i, j, i, j + 1);
@@ -74,7 +82,7 @@ public class Percolation {
 
 
     private void checkIndexes(int i, int j) {
-        if (i < 1 || j < 1 || i >= n || j >= n)
+        if (i < 0 || j < 0 || i >= n || j >= n)
             throw new IndexOutOfBoundsException();
     }
 
