@@ -1,7 +1,7 @@
 import Percolation.State
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.junit.Test
+import org.junit.{Assert, Test}
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,6 +32,24 @@ class PercolationTest {
     p.open(1, 2)
     p.open(1, 3)
     p.open(1, 1)
+    p.open(1, 4)
+    p.open(2, 4)
+    p.open(3, 4)
+    p.open(3, 3)
+
+    Assert.assertFalse(p.percolates)
+
+    p.open(0, 2)
+    p.open(0, 3)
+    p.open(0, 4)
+    p.open(1, 4)
+
+    Assert.assertFalse(p.percolates)
+
+    p.open(4, 3)
+    p.open(4, 2)
+
+    Assert.assertTrue(p.percolates)
 
     printPercolation(p)
   }
