@@ -8,14 +8,31 @@ public class Percolation {
 
     private final int n;
 
-    private final State[][] grid;
+    private final boolean[][] grid;
+
+    private final boolean full[];
 
     public int getN() {
         return n;
     }
 
     public State[][] getGrid() {
-        return grid;
+        State[][] result = new State[n][n];
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                State state;
+
+                if (!isOpen(i, j))
+                    state = State.BLOCKED;
+                else
+                    state = isFull(i, j) ? State.FULL : State.OPEN;
+
+                result[i][j] = state;
+            }
+        }
+
+        return result;
     }
 
     private final WeightedQuickUnionUF uf;
@@ -26,11 +43,9 @@ public class Percolation {
         if (N <= 0)
             throw new IllegalArgumentException("N must be greater than zero");
 
-        grid = new State[N][N];
+        grid = new boolean[N][N];
 
-        for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
-                grid[i][j] = State.BLOCKED;
+        full = new boolean[N * N];
 
         uf = new WeightedQuickUnionUF(N * N);
     }
@@ -40,7 +55,10 @@ public class Percolation {
         if (isOpen(i, j))
             return;
 
-        grid[i][j] = i == 0 ? State.FULL : State.OPEN;
+        grid[i][j] = true;
+
+        if (i == 0)
+            full[uf.find(index(i, j))] = true;
 
         if (i > 0)
             checkAndUnion(i, j, i - 1, j);
@@ -54,15 +72,15 @@ public class Percolation {
 
     private void checkAndUnion(int i1, int j1, int i2, int j2) {
         if (isOpen(i2, j2)) {
-            uf.union(index(i2, j2), index(i1, j1));
-
             boolean full1 = isFull(i1, j1);
             boolean full2 = isFull(i2, j2);
 
             if (full1 && !full2)
-                grid[i2][j2] = State.FULL;
+                full[index(i2, j2)] = true;
             else if (full2 && !full1)
-                grid[i1][j1] = State.FULL;
+                full[index(i1, j1)] = true;
+
+            uf.union(index(i2, j2), index(i1, j1));
         }
     }
 
@@ -70,14 +88,14 @@ public class Percolation {
     public boolean isOpen(int i, int j) {
         checkIndexes(i, j);
 
-        return grid[i][j] != State.BLOCKED;
+        return grid[i][j];
     }
 
     // is site (row i, column j) full?
     public boolean isFull(int i, int j) {
         checkIndexes(i, j);
 
-        return grid[i][j] == State.FULL;
+        return full[uf.find(index(i, j))];
     }
 
 
