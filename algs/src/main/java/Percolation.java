@@ -122,10 +122,4 @@ public class Percolation {
     private int index(int i, int j) {
         return i * n + j;
     }
-
-    public static void main(String[] args) {
-        Percolation percolation = new Percolation(20);
-
-        System.out.println("percolation = " + percolation);
-    }
 }

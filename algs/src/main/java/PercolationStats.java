@@ -1,27 +1,57 @@
 public class PercolationStats {
+
+    private final int n;
+    private final int t;
+
+    private final double[] x;
+
     // perform T independent computational experiments on an N-by-N grid
     public PercolationStats(int N, int T) {
+        n = N;
+        t = T;
+        if (N <= 0 || T <= 0)
+            throw new IllegalArgumentException();
 
+        x = new double[t];
+
+        for (int k = 0; k < t; k++) {
+            int c = 0;
+
+            Percolation p = new Percolation(n);
+
+            do {
+                int i = (int) (StdRandom.random() * n);
+                int j = (int) (StdRandom.random() * n);
+                if (!p.isOpen(i, j)) {
+
+                    p.open(i, j);
+                    c++;
+                }
+
+            } while (!p.percolates());
+
+            x[k] = ((double) c) / (double) (n * n);
+        }
     }
 
     // sample mean of percolation threshold
     public double mean() {
-       return 0.0;
+        return StdStats.mean(x);
     }
 
     // sample standard deviation of percolation threshold
     public double stddev() {
-       return 0.0;
+        return StdStats.stddev(x);
     }
 
     // returns lower bound of the 95% confidence interval
     public double confidenceLo() {
-       return 0.0;
+        return mean() - ((1.96 * stddev()) / Math.sqrt(t));
     }
 
     // returns upper bound of the 95% confidence interval
     public double confidenceHi() {
-       return 0.0;
+        return mean() + ((1.96 * stddev()) / Math.sqrt(t));
     }
 
     // test client, described below
