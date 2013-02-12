@@ -1,4 +1,3 @@
-import Percolation.State
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.junit.{Assert, Test}
@@ -13,15 +12,18 @@ import org.junit.{Assert, Test}
 class PercolationTest {
 
   def printPercolation(p: Percolation) {
-    p.getGrid.foreach((row: Array[State]) => {
-      row.foreach({
-        case State.OPEN => print("O ")
-        case State.BLOCKED => print("B ")
-        case State.FULL => print("F ")
-      })
+    for (i <- 1 to p.getN) {
+      for (j <- 1 to p.getN) {
+        if (p.isFull(i, j))
+          print("F ")
+        else if (p.isOpen(i, j))
+          print("O ")
+        else
+          print("B ")
+      }
 
       println()
-    })
+    }
   }
 
   def af(b: Boolean) {
@@ -36,29 +38,29 @@ class PercolationTest {
   def testOpen(){
     val p = new Percolation(5)
 
-    open(p, 0, 1)
     open(p, 1, 2)
-    open(p, 1, 3)
-    open(p, 1, 1)
-    open(p, 1, 4)
+    open(p, 2, 3)
     open(p, 2, 4)
-    open(p, 3, 4)
-    open(p, 3, 3)
+    open(p, 2, 2)
+    open(p, 2, 5)
+    open(p, 3, 5)
+    open(p, 4, 5)
+    open(p, 4, 4)
 
     Assert.assertFalse(p.percolates)
 
-    open(p, 2, 0)
-    open(p, 3, 0)
-    open(p, 4, 0)
+    open(p, 3, 1)
+    open(p, 4, 1)
+    open(p, 5, 1)
 
     Assert.assertFalse(p.percolates)
 
-    open(p, 4, 3)
-    open(p, 4, 2)
+    open(p, 5, 4)
+    open(p, 5, 3)
 
     Assert.assertTrue(p.percolates)
 
-    af(p.isOpen(0, 2))
+    af(p.isOpen(1, 3))
 
     printPercolation(p)
   }

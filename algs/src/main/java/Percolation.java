@@ -1,35 +1,10 @@
 public class Percolation {
 
-    public static enum State {
-        BLOCKED,
-        OPEN,
-        FULL
-    }
-
     private final int n;
 
     private final boolean[][] grid;
 
     private final boolean full[];
-
-    public State[][] getGrid() {
-        State[][] result = new State[n][n];
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                State state;
-
-                if (!isOpen(i, j))
-                    state = State.BLOCKED;
-                else
-                    state = isFull(i, j) ? State.FULL : State.OPEN;
-
-                result[i][j] = state;
-            }
-        }
-
-        return result;
-    }
 
     private final WeightedQuickUnionUF uf;
 
@@ -46,12 +21,16 @@ public class Percolation {
         uf = new WeightedQuickUnionUF(N * N);
     }
 
+    public int getN() {
+        return n;
+    }
+
     // open site (row i, column j) if it is not already
     public void open(int i, int j) {
         if (isOpen(i, j))
             return;
 
-        grid[i][j] = true;
+        grid[i - 1][j - 1] = true;
 
         if (i == 0)
             full[uf.find(index(i, j))] = true;
@@ -82,6 +61,7 @@ public class Percolation {
 
     // is site (row i, column j) open?
     public boolean isOpen(int i, int j) {
+        i--; j--;
         checkIndexes(i, j);
 
         return grid[i][j];
@@ -89,7 +69,7 @@ public class Percolation {
 
     // is site (row i, column j) full?
     public boolean isFull(int i, int j) {
-        checkIndexes(i, j);
+        checkIndexes(i - 1, j - 1);
 
         return full[uf.find(index(i, j))];
     }
@@ -102,7 +82,6 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
-
         for (int i = 0; i < n; i++) {
             boolean hasFull = false;
 
@@ -120,6 +99,6 @@ public class Percolation {
     }
 
     private int index(int i, int j) {
-        return i * n + j;
+        return (i - 1) * n + (j - 1);
     }
 }
