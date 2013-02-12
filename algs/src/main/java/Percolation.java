@@ -35,13 +35,13 @@ public class Percolation {
         if (i == 0)
             full[uf.find(index(i, j))] = true;
 
-        if (i > 0)
+        if (i > 1)
             checkAndUnion(i, j, i - 1, j);
-        if (i < n - 1)
+        if (i < n)
             checkAndUnion(i, j, i + 1, j);
-        if (j > 0)
+        if (j > 1)
             checkAndUnion(i, j, i, j - 1);
-        if (j < n - 1)
+        if (j < n)
             checkAndUnion(i, j, i, j + 1);
     }
 
