@@ -20,13 +20,28 @@ public class PercolationStats {
             Percolation p = new Percolation(n);
 
             do {
-                int i = 1 + (int) (StdRandom.random() * n);
-                int j = 1 + (int) (StdRandom.random() * n);
-                if (!p.isOpen(i, j)) {
+                int i;
+                int j;
 
-                    p.open(i, j);
-                    c++;
-                }
+                int d = 0;
+
+                do {
+                    i = 1 + (int) (StdRandom.random() * n);
+                    j = 1 + (int) (StdRandom.random() * n);
+
+                    System.out.println("i = " + i + " j = " + j);
+
+                    d++;
+                    if(d > n * n)
+                        throw new IllegalStateException();
+
+                } while (p.isOpen(i, j));
+
+                p.open(i, j);
+                c++;
+
+                if (c > n * n)
+                    throw new IllegalStateException();
 
             } while (!p.percolates());
 
@@ -61,6 +76,16 @@ public class PercolationStats {
 
         int n = Integer.parseInt(args[0]);
         int t = Integer.parseInt(args[1]);
+
+        int i = 0;
+
+        do {
+            i++;
+            if(i > 100)
+                break;
+        }while(i != 10);
+
+        System.out.println("i = " + i);
 
         PercolationStats ps = new PercolationStats(n, t);
 
