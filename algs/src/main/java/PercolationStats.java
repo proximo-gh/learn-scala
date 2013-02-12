@@ -57,7 +57,7 @@ public class PercolationStats {
     // test client, described below
     public static void main(String[] args) {
         if (args.length != 2)
-            throw new IllegalArgumentException("args lenght must be 2");
+            throw new IllegalArgumentException("args length must be 2");
 
         int n = Integer.parseInt(args[0]);
         int t = Integer.parseInt(args[1]);
