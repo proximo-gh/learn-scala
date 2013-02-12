@@ -56,6 +56,16 @@ public class PercolationStats {
 
     // test client, described below
     public static void main(String[] args) {
+        if (args.length != 2)
+            throw new IllegalArgumentException("args lenght must be 2");
 
+        int n = Integer.parseInt(args[0]);
+        int t = Integer.parseInt(args[1]);
+
+        PercolationStats ps = new PercolationStats(n, t);
+
+        StdOut.println("mean                    = " + ps.mean());
+        StdOut.println("stddev                  = " + ps.stddev());
+        StdOut.println("95% confidence interval = " + ps.confidenceLo() + ", " + ps.confidenceHi());
     }
 }
