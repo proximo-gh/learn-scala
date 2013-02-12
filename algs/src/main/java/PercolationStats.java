@@ -20,8 +20,8 @@ public class PercolationStats {
             Percolation p = new Percolation(n);
 
             do {
-                int i = (int) (StdRandom.random() * n);
-                int j = (int) (StdRandom.random() * n);
+                int i = 1 + (int) (StdRandom.random() * n);
+                int j = 1 + (int) (StdRandom.random() * n);
                 if (!p.isOpen(i, j)) {
 
                     p.open(i, j);
