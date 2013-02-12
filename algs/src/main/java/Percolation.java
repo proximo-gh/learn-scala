@@ -82,10 +82,10 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i <= n; i++) {
             boolean hasFull = false;
 
-            for (int j = 0; j < n; j++)
+            for (int j = 1; j <= n; j++)
                 if (isFull(i, j)) {
                     hasFull = true;
                     break;
