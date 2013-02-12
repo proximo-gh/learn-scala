@@ -32,7 +32,7 @@ public class Percolation {
 
         grid[i - 1][j - 1] = true;
 
-        if (i == 0)
+        if (i == 1)
             full[uf.find(index(i, j))] = true;
 
         if (i > 1)
