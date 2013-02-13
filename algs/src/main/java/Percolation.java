@@ -49,12 +49,14 @@ public class Percolation {
 
     private void checkAndUnion(int i1, int j1, int i2, int j2) {
         if (isOpen(i2, j2)) {
+/*
             boolean full1 = isFull(i1, j1);
             boolean full2 = isFull(i2, j2);
 
             if (full1 && !full2)
+*/
                 full[ufIndex(i2, j2)] = true;
-            else if (full2 && !full1)
+//            else if (full2 && !full1)
                 full[ufIndex(i1, j1)] = true;
 
             uf.union(index(i1, j1), index(i2, j2));
