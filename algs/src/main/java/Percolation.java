@@ -33,7 +33,7 @@ public class Percolation {
         grid[i - 1][j - 1] = true;
 
         if (i == 1)
-            full[uf.find(index(i, j))] = true;
+            full[ufIndex(i, j)] = true;
 
         if (i > 1)
             checkAndUnion(i, j, i - 1, j);
@@ -51,11 +51,11 @@ public class Percolation {
             boolean full2 = isFull(i2, j2);
 
             if (full1 && !full2)
-                full[index(i2, j2)] = true;
+                full[ufIndex(i2, j2)] = true;
             else if (full2 && !full1)
-                full[index(i1, j1)] = true;
+                full[ufIndex(i1, j1)] = true;
 
-            uf.union(index(i2, j2), index(i1, j1));
+            uf.union(index(i1, j1), index(i2, j2));
         }
     }
 
@@ -71,7 +71,11 @@ public class Percolation {
     public boolean isFull(int i, int j) {
         checkIndexes(i - 1, j - 1);
 
-        return full[uf.find(index(i, j))];
+        return full[ufIndex(i, j)];
+    }
+
+    private int ufIndex(int i, int j) {
+        return uf.find(index(i, j));
     }
 
 

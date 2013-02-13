@@ -15,6 +15,7 @@ public class PercolationStats {
         x = new double[t];
 
         for (int k = 0; k < t; k++) {
+
             int c = 0;
 
             Percolation p = new Percolation(n);
@@ -23,29 +24,47 @@ public class PercolationStats {
                 int i;
                 int j;
 
-                int d = 0;
-
                 do {
                     i = 1 + (int) (StdRandom.random() * n);
                     j = 1 + (int) (StdRandom.random() * n);
 
+/*
+                    printPercolation(p);
                     System.out.println("i = " + i + " j = " + j);
-
-                    d++;
-                    if(d > n * n)
-                        throw new IllegalStateException();
-
+*/
                 } while (p.isOpen(i, j));
 
                 p.open(i, j);
                 c++;
-
-                if (c > n * n)
-                    throw new IllegalStateException();
-
             } while (!p.percolates());
 
+/*
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println("!!!!!!percolates!!!!!!!");
+
+            printPercolation(p);
+            System.out.println();
+*/
+
             x[k] = ((double) c) / (double) (n * n);
+        }
+    }
+
+    public static void printPercolation(Percolation p) {
+        for(int i = 1; i <= p.getN(); i++) {
+            for(int j = 1; j <= p.getN(); j++) {
+                if (p.isFull(i, j))
+                    System.out.print("F ");
+                else if (p.isOpen(i, j))
+                    System.out.print("O ");
+                else
+                    System.out.print("B ");
+            }
+
+            System.out.println();
         }
     }
 
