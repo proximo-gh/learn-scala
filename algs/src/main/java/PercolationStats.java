@@ -102,7 +102,9 @@ public class PercolationStats {
 
         StdOut.println("mean                    = " + ps.mean());
         StdOut.println("stddev                  = " + ps.stddev());
-        StdOut.println("95% confidence interval = " +
-                ps.confidenceLo() + ", " + ps.confidenceHi());
+
+        double cLo = ps.confidenceLo();
+        double cHi = ps.confidenceHi();
+        StdOut.println("95% confidence interval = " + cLo + ", " + cHi);
     }
 }
