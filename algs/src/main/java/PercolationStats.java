@@ -53,6 +53,7 @@ public class PercolationStats {
         }
     }
 
+/*
     public static void printPercolation(Percolation p) {
         for(int i = 1; i <= p.getN(); i++) {
             for(int j = 1; j <= p.getN(); j++) {
@@ -67,6 +68,7 @@ public class PercolationStats {
             System.out.println();
         }
     }
+*/
 
     // sample mean of percolation threshold
     public double mean() {
@@ -95,16 +97,6 @@ public class PercolationStats {
 
         int n = Integer.parseInt(args[0]);
         int t = Integer.parseInt(args[1]);
-
-        int i = 0;
-
-        do {
-            i++;
-            if(i > 100)
-                break;
-        }while(i != 10);
-
-        System.out.println("i = " + i);
 
         PercolationStats ps = new PercolationStats(n, t);
 

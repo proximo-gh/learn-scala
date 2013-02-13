@@ -12,6 +12,7 @@ import org.junit.{Assert, Test}
 class PercolationTest {
 
   def printPercolation(p: Percolation) {
+/*
     for (i <- 1 to p.getN) {
       for (j <- 1 to p.getN) {
         if (p.isFull(i, j))
@@ -24,6 +25,7 @@ class PercolationTest {
 
       println()
     }
+*/
   }
 
   def af(b: Boolean) {

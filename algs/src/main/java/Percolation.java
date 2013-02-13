@@ -20,10 +20,12 @@ public class Percolation {
 
         uf = new WeightedQuickUnionUF(N * N);
     }
+/*
 
     public int getN() {
         return n;
     }
+*/
 
     // open site (row i, column j) if it is not already
     public void open(int i, int j) {
