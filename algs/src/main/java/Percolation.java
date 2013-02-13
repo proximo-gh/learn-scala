@@ -4,7 +4,7 @@ public class Percolation {
 
     private final boolean[][] grid;
 
-    private final boolean full[];
+    private final boolean[] full;
 
     private final WeightedQuickUnionUF uf;
 
@@ -63,10 +63,9 @@ public class Percolation {
 
     // is site (row i, column j) open?
     public boolean isOpen(int i, int j) {
-        i--; j--;
-        checkIndexes(i, j);
+        checkIndexes(i - 1, j - 1);
 
-        return grid[i][j];
+        return grid[i - 1][j - 1];
     }
 
     // is site (row i, column j) full?
