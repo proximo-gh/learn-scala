@@ -4,8 +4,6 @@ public class Percolation {
 
     private final boolean[][] grid;
 
-    private final boolean[] full;
-
     private final WeightedQuickUnionUF uf;
 
     private final int virtualTop;
@@ -23,8 +21,6 @@ public class Percolation {
         grid = new boolean[n1][n1];
 
         int p = n1 * n1;
-
-        full = new boolean[p];
 
         uf = new WeightedQuickUnionUF(p + 2);
 
