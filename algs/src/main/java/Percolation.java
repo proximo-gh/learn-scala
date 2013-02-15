@@ -58,12 +58,12 @@ public class Percolation {
 
             if (full1 && !full2) {
                 full[ufi2] = true;
-                if (i2 == n)
+                if (i2 == n - 1)
                     percolates = true;
             }
             else if (full2 && !full1) {
                 full[ufi1] = true;
-                if (i1 == n)
+                if (i1 == n - 1)
                     percolates = true;
             }
 
