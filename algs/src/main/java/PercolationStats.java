@@ -28,14 +28,17 @@ public class PercolationStats {
                     i = 1 + (int) (StdRandom.random() * n);
                     j = 1 + (int) (StdRandom.random() * n);
 
+/*
                     printPercolation(p, n);
                     System.out.println("i = " + i + " j = " + j);
+*/
                 } while (p.isOpen(i, j));
 
                 p.open(i, j);
                 c++;
             } while (!p.percolates());
 
+/*
             System.out.println();
             System.out.println();
             System.out.println();
@@ -45,6 +48,7 @@ public class PercolationStats {
             printPercolation(p, n);
             System.out.println();
 
+*/
             x[k] = ((double) c) / (double) (n * n);
         }
     }
