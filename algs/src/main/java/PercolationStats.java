@@ -28,35 +28,30 @@ public class PercolationStats {
                     i = 1 + (int) (StdRandom.random() * n);
                     j = 1 + (int) (StdRandom.random() * n);
 
-/*
-                    printPercolation(p);
+                    printPercolation(p, n);
                     System.out.println("i = " + i + " j = " + j);
-*/
                 } while (p.isOpen(i, j));
 
                 p.open(i, j);
                 c++;
             } while (!p.percolates());
 
-/*
             System.out.println();
             System.out.println();
             System.out.println();
             System.out.println();
             System.out.println("!!!!!!percolates!!!!!!!");
 
-            printPercolation(p);
+            printPercolation(p, n);
             System.out.println();
-*/
 
             x[k] = ((double) c) / (double) (n * n);
         }
     }
 
-/*
-    public static void printPercolation(Percolation p) {
-        for(int i = 1; i <= p.getN(); i++) {
-            for(int j = 1; j <= p.getN(); j++) {
+    private static void printPercolation(Percolation p, int n) {
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= n; j++) {
                 if (p.isFull(i, j))
                     System.out.print("F ");
                 else if (p.isOpen(i, j))
@@ -68,7 +63,6 @@ public class PercolationStats {
             System.out.println();
         }
     }
-*/
 
     // sample mean of percolation threshold
     public double mean() {

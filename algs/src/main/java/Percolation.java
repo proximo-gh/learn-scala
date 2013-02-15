@@ -36,8 +36,12 @@ public class Percolation {
 
         grid[i - 1][j - 1] = true;
 
-        if (i == 1)
+        if (i == 1) {
             full[ufIndex(i, j)] = true;
+
+            if (n == 1)
+                percolates = true;
+        }
 
         if (i > 1)
             checkAndUnion(i, j, i - 1, j);
