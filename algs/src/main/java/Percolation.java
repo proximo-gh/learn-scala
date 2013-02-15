@@ -8,6 +8,8 @@ public class Percolation {
 
     private final WeightedQuickUnionUF uf;
 
+    private boolean percolates = false;
+
     // create N-by-N grid, with all sites blocked
     public Percolation(int N) {
         n = N;
@@ -54,10 +56,16 @@ public class Percolation {
             boolean full1 = full[ufi1];
             boolean full2 = full[ufi2];
 
-            if (full1 && !full2)
+            if (full1 && !full2) {
                 full[ufi2] = true;
-            else if (full2 && !full1)
+                if (i2 == n)
+                    percolates = true;
+            }
+            else if (full2 && !full1) {
                 full[ufi1] = true;
+                if (i1 == n)
+                    percolates = true;
+            }
 
             uf.union(index(i1, j1), index(i2, j2));
         }
@@ -89,6 +97,7 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
+/*
         for (int i = 1; i <= n; i++) {
             boolean hasFull = false;
 
@@ -103,6 +112,15 @@ public class Percolation {
         }
 
         return true;
+*/
+/*
+        for (int j = 1; j <= n; j++)
+            if (isOpen(n, j) && isFull(n, j))
+                return true;
+
+        return false;
+*/
+        return percolates;
     }
 
     private int index(int i, int j) {
