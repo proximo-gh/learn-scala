@@ -8,7 +8,8 @@ public class Percolation {
 
     private final WeightedQuickUnionUF uf;
 
-    private boolean percolates = false;
+    private final int virtualTop;
+    private final int virtualBottom;
 
     // create N-by-N grid, with all sites blocked
     public Percolation(int N) {
@@ -21,9 +22,14 @@ public class Percolation {
 
         grid = new boolean[n1][n1];
 
-        full = new boolean[n1 * n1];
+        int p = n1 * n1;
 
-        uf = new WeightedQuickUnionUF(n1 * n1);
+        full = new boolean[p];
+
+        uf = new WeightedQuickUnionUF(p + 2);
+
+        virtualTop = p;
+        virtualBottom = p + 1;
     }
 /*
 
@@ -39,12 +45,12 @@ public class Percolation {
 
         grid[i][j] = true;
 
-        if (i == 1) {
-            full[ufIndex(i, j)] = true;
+        int index = index(i, j);
 
-            if (n == 1)
-                percolates = true;
-        }
+        if (i == 1)
+            uf.union(virtualTop, index);
+        if (i == n)
+            uf.union(virtualBottom, index);
 
         if (i > 1)
             checkAndUnion(i, j, i - 1, j);
@@ -58,23 +64,10 @@ public class Percolation {
 
     private void checkAndUnion(int i1, int j1, int i2, int j2) {
         if (isOpen(i2, j2)) {
-            int ufi1 = ufIndex(i1, j1);
-            int ufi2 = ufIndex(i2, j2);
-            boolean full1 = full[ufi1];
-            boolean full2 = full[ufi2];
+            int index1 = index(i1, j1);
+            int index2 = index(i2, j2);
 
-            if (full1 && !full2) {
-                full[ufi2] = true;
-                if (i2 == n)
-                    percolates = true;
-            }
-            else if (full2 && !full1) {
-                full[ufi1] = true;
-                if (i1 == n)
-                    percolates = true;
-            }
-
-            uf.union(index(i1, j1), index(i2, j2));
+            uf.union(index1, index2);
         }
     }
 
@@ -89,13 +82,8 @@ public class Percolation {
     public boolean isFull(int i, int j) {
         checkIndexes(i, j);
 
-        return full[ufIndex(i, j)];
+        return uf.connected(index(i, j), virtualTop);
     }
-
-    private int ufIndex(int i, int j) {
-        return uf.find(index(i, j));
-    }
-
 
     private void checkIndexes(int i, int j) {
         if (i < 1 || j < 1 || i > n || j > n)
@@ -104,30 +92,7 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
-/*
-        for (int i = 1; i <= n; i++) {
-            boolean hasFull = false;
-
-            for (int j = 1; j <= n; j++)
-                if (isOpen(i, j) && isFull(i, j)) {
-                    hasFull = true;
-                    break;
-                }
-
-            if (!hasFull)
-                return false;
-        }
-
-        return true;
-*/
-/*
-        for (int j = 1; j <= n; j++)
-            if (isOpen(n, j) && isFull(n, j))
-                return true;
-
-        return false;
-*/
-        return percolates;
+        return uf.connected(virtualTop, virtualBottom);
     }
 
     private int index(int i, int j) {
