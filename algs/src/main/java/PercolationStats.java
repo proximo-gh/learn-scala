@@ -54,8 +54,8 @@ public class PercolationStats {
     }
 
     private static void printPercolation(Percolation p, int n) {
-        for(int i = 1; i <= n; i++) {
-            for(int j = 1; j <= n; j++) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
                 if (p.isFull(i, j))
                     System.out.print("F ");
                 else if (p.isOpen(i, j))
