@@ -93,7 +93,7 @@ public class Percolation {
             boolean hasFull = false;
 
             for (int j = 1; j <= n; j++)
-                if (isFull(i, j)) {
+                if (isOpen(i, j) && isFull(i, j)) {
                     hasFull = true;
                     break;
                 }
