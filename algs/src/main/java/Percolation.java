@@ -12,15 +12,18 @@ public class Percolation {
 
     // create N-by-N grid, with all sites blocked
     public Percolation(int N) {
-        n = N;
         if (N <= 0)
             throw new IllegalArgumentException("N must be greater than zero");
 
-        grid = new boolean[N][N];
+        n = N;
 
-        full = new boolean[N * N];
+        int n1 = n + 1;
 
-        uf = new WeightedQuickUnionUF(N * N);
+        grid = new boolean[n1][n1];
+
+        full = new boolean[n1 * n1];
+
+        uf = new WeightedQuickUnionUF(n1 * n1);
     }
 /*
 
@@ -34,7 +37,7 @@ public class Percolation {
         if (isOpen(i, j))
             return;
 
-        grid[i - 1][j - 1] = true;
+        grid[i][j] = true;
 
         if (i == 1) {
             full[ufIndex(i, j)] = true;
@@ -62,12 +65,12 @@ public class Percolation {
 
             if (full1 && !full2) {
                 full[ufi2] = true;
-                if (i2 == n - 1)
+                if (i2 == n)
                     percolates = true;
             }
             else if (full2 && !full1) {
                 full[ufi1] = true;
-                if (i1 == n - 1)
+                if (i1 == n)
                     percolates = true;
             }
 
@@ -77,14 +80,14 @@ public class Percolation {
 
     // is site (row i, column j) open?
     public boolean isOpen(int i, int j) {
-        checkIndexes(i - 1, j - 1);
+        checkIndexes(i, j);
 
-        return grid[i - 1][j - 1];
+        return grid[i][j];
     }
 
     // is site (row i, column j) full?
     public boolean isFull(int i, int j) {
-        checkIndexes(i - 1, j - 1);
+        checkIndexes(i, j);
 
         return full[ufIndex(i, j)];
     }
@@ -95,7 +98,7 @@ public class Percolation {
 
 
     private void checkIndexes(int i, int j) {
-        if (i < 0 || j < 0 || i >= n || j >= n)
+        if (i < 1 || j < 1 || i > n || j > n)
             throw new IndexOutOfBoundsException();
     }
 
@@ -128,6 +131,6 @@ public class Percolation {
     }
 
     private int index(int i, int j) {
-        return (i - 1) * n + (j - 1);
+        return i * n + j;
     }
 }
