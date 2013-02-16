@@ -5,6 +5,7 @@ public class Percolation {
     private final boolean[][] grid;
 
     private final WeightedQuickUnionUF uf;
+    private final WeightedQuickUnionUF ufp;
 
     private final int virtualTop;
     private final int virtualBottom;
@@ -22,10 +23,11 @@ public class Percolation {
 
         int p = n1 * n1;
 
-        uf = new WeightedQuickUnionUF(p + 2);
+        uf = new WeightedQuickUnionUF(p + 1);
+        ufp = new WeightedQuickUnionUF(n1);
 
         virtualTop = p;
-        virtualBottom = p + 1;
+        virtualBottom = 0;
     }
 /*
 
@@ -46,7 +48,7 @@ public class Percolation {
         if (i == 1)
             uf.union(virtualTop, index);
         if (i == n)
-            uf.union(virtualBottom, index);
+            ufp.union(virtualBottom, j);
 
         if (i > 1)
             checkAndUnion(i, j, i - 1, j);
