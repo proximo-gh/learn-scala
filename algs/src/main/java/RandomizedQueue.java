@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
@@ -23,18 +24,25 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // add the item
     public void enqueue(Item item) {
-        if (items.length == size) {
-            Object[] newItems = new Object[size + 1];
-
-            for (int i = 0; i < items.length; i++)
-                newItems[i] = items[i];
-
-            items = newItems;
-        }
+        if (items.length == size)
+            grow();
 
         items[size] = item;
 
         size++;
+    }
+
+    private void grow() {
+        Object[] newItems = new Object[size + growFactor()];
+
+        for (int i = 0; i < items.length; i++)
+            newItems[i] = items[i];
+
+        items = newItems;
+    }
+
+    private int growFactor() {
+        return 1;
     }
 
     // delete and return a random item
@@ -43,6 +51,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         Item item = (Item) items[index];
 
+        for (int i = index; i < size - 1; i++)
+            items[i] = items[i + 1];
+
+        size--;
 
         return item;
     }
@@ -55,19 +67,33 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // return an independent iterator over items in random order
     public Iterator<Item> iterator() {
         return new Iterator<Item>() {
+
+            Object[] itItems;
+            int index;
+
+            {
+                itItems = new Object[size];
+
+                for (int i = 0; i < itItems.length; i++)
+                    itItems[i] = items[i];
+            }
+
             @Override
             public boolean hasNext() {
-                return false;
+                return index < itItems.length;
             }
 
             @Override
             public Item next() {
-                return null;
+                if (index >= itItems.length)
+                    throw new NoSuchElementException();
+
+                return (Item) itItems[++index];
             }
 
             @Override
             public void remove() {
-
+                throw new UnsupportedOperationException();
             }
         };
     }
