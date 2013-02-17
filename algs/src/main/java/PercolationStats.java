@@ -47,8 +47,8 @@ public class PercolationStats {
 
             printPercolation(p, n);
             System.out.println();
-
 */
+
             x[k] = ((double) c) / (double) (n * n);
         }
     }

@@ -23,7 +23,7 @@ public class Percolation {
 
         int p = n1 * n1;
 
-        uf = new WeightedQuickUnionUF(p);
+        uf = new WeightedQuickUnionUF(p + 1);
         ufp = new WeightedQuickUnionUF(p + 1);
 
         virtualTop = 0;
@@ -48,7 +48,7 @@ public class Percolation {
             union(virtualTop, index);
 
         if (i == n)
-            ufp.union(virtualBottom, j);
+            ufp.union(virtualBottom, index);
 
         if (i > 1)
             checkAndUnion(i, j, i - 1, j);
