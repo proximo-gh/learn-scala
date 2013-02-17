@@ -23,11 +23,11 @@ public class Percolation {
 
         int p = n1 * n1;
 
-        uf = new WeightedQuickUnionUF(p + 1);
-        ufp = new WeightedQuickUnionUF(n1);
+        uf = new WeightedQuickUnionUF(p);
+        ufp = new WeightedQuickUnionUF(p + 1);
 
-        virtualTop = p;
-        virtualBottom = 0;
+        virtualTop = 0;
+        virtualBottom = p;
     }
 /*
 
@@ -44,9 +44,9 @@ public class Percolation {
         grid[i][j] = true;
 
         int index = index(i, j);
-
         if (i == 1)
-            uf.union(virtualTop, index);
+            union(virtualTop, index);
+
         if (i == n)
             ufp.union(virtualBottom, j);
 
@@ -65,8 +65,13 @@ public class Percolation {
             int index1 = index(i1, j1);
             int index2 = index(i2, j2);
 
-            uf.union(index1, index2);
+            union(index1, index2);
         }
+    }
+
+    private void union(int index1, int index2) {
+        uf.union(index1, index2);
+        ufp.union(index1, index2);
     }
 
     // is site (row i, column j) open?
@@ -83,14 +88,14 @@ public class Percolation {
         return uf.connected(index(i, j), virtualTop);
     }
 
+    // does the system percolate?
+    public boolean percolates() {
+        return ufp.connected(virtualTop, virtualBottom);
+    }
+
     private void checkIndexes(int i, int j) {
         if (i < 1 || j < 1 || i > n || j > n)
             throw new IndexOutOfBoundsException();
-    }
-
-    // does the system percolate?
-    public boolean percolates() {
-        return uf.connected(virtualTop, virtualBottom);
     }
 
     private int index(int i, int j) {
