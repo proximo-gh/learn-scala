@@ -11,10 +11,9 @@ import org.junit.{Assert, Test}
 @RunWith(classOf[JUnit4])
 class PercolationTest {
 
-  def printPercolation(p: Percolation) {
-/*
-    for (i <- 1 to p.getN) {
-      for (j <- 1 to p.getN) {
+  def printPercolation(p: Percolation, n: Int) {
+    for (i <- 1 to n) {
+      for (j <- 1 to n) {
         if (p.isFull(i, j))
           print("F ")
         else if (p.isOpen(i, j))
@@ -25,19 +24,18 @@ class PercolationTest {
 
       println()
     }
-*/
   }
 
   def af(b: Boolean) {
     Assert assertFalse (b)
   }
-  
+
   def at(b: Boolean) {
     Assert assertTrue (b)
   }
-  
+
   @Test
-  def testOpen(){
+  def testOpen() {
     val p = new Percolation(5)
 
     open(p, 1, 2)
@@ -60,11 +58,11 @@ class PercolationTest {
     open(p, 5, 4)
     open(p, 5, 3)
 
-//    Assert.assertTrue(p.percolates)
+    Assert.assertTrue(p.percolates)
 
     af(p.isOpen(1, 3))
 
-    printPercolation(p)
+    printPercolation(p, 5)
   }
 
   def open(p: Percolation, i: Int, j: Int) {
