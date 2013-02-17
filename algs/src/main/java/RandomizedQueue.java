@@ -36,9 +36,23 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private void grow() {
-        Object[] newItems = new Object[size + growFactor()];
+        copyItems(size + growFactor());
+    }
 
-        for (int i = 0; i < items.length; i++)
+    private void shrink() {
+        if (items.length - size >= shrinkFactor())
+
+            copyItems(size);
+    }
+
+    private int shrinkFactor() {
+        return 1;
+    }
+
+    private void copyItems(int newCapacity) {
+        Object[] newItems = new Object[newCapacity];
+
+        for (int i = 0; i < size; i++)
             newItems[i] = items[i];
 
         items = newItems;
@@ -60,6 +74,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             items[i] = items[i + 1];
 
         size--;
+
+        shrink();
 
         return item;
     }
