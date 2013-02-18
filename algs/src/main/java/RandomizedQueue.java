@@ -45,7 +45,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private int shrinkFactor() {
-        return size / 2;
+        return size / 10;
     }
 
     private void copyItems(int newCapacity) {
@@ -93,32 +93,35 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // return an independent iterator over items in random order
     public Iterator<Item> iterator() {
-        return new Iterator<Item>() {
-            private Object[] itItems;
-            private int index;
+        return new ListIterator<Item>();
+    }
 
-            {
-                itItems = new Object[size];
-                for (int i = 0; i < itItems.length; i++)
-                    itItems[i] = items[i];
-            }
+    private class ListIterator<Item> implements Iterator<Item> {
+        private Object[] itItems;
+        private int index;
 
-            @Override
-            public boolean hasNext() {
-                return index < itItems.length;
-            }
+        private void ListIterator()
+        {
+            itItems = new Object[size];
+            for (int i = 0; i < itItems.length; i++)
+                itItems[i] = items[i];
+        }
 
-            @Override
-            public Item next() {
-                if (index >= itItems.length)
-                    throw new NoSuchElementException();
-                return (Item) itItems[index++];
-            }
+        @Override
+        public boolean hasNext() {
+            return index < itItems.length;
+        }
 
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException();
-            }
-        };
+        @Override
+        public Item next() {
+            if (index >= itItems.length)
+                throw new NoSuchElementException();
+            return (Item) itItems[index++];
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 }

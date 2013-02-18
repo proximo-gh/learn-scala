@@ -61,9 +61,11 @@ public class Deque<Item> implements Iterable<Item> {
 
         Item item = head.item;
 
-        if (head == tail) //size == 1
-            head = tail = null;
-        else {
+        //size == 1
+        if (head == tail) {
+            head = null;
+            tail = null;
+        } else {
             head = head.next;
             head.prev = null;
         }
@@ -79,9 +81,11 @@ public class Deque<Item> implements Iterable<Item> {
 
         Item item = tail.item;
 
-        if (head == tail) //size == 1
-            head = tail = null;
-        else {
+        //size == 1
+        if (head == tail) {
+            head = null;
+            tail = null;
+        } else {
             tail = tail.prev;
             tail.next = null;
         }
@@ -135,10 +139,10 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     private static final class Node<Item> {
-        Item item;
+        private Item item;
 
-        Node<Item> prev;
-        Node<Item> next;
+        private Node<Item> prev;
+        private Node<Item> next;
 
         private Node(Item item) {
             this.item = item;
