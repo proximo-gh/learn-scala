@@ -100,7 +100,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         private Object[] itItems;
         private int index;
 
-        private void ListIterator()
+        private ListIterator()
         {
             itItems = new Object[size];
             for (int i = 0; i < itItems.length; i++)
