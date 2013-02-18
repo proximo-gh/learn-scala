@@ -8,7 +8,7 @@ public class Subset {
     public static void main(String[] args) {
         int k = Integer.valueOf(args[0]);
 
-        RandomizedQueue<String> queue = new RandomizedQueue<>();
+        RandomizedQueue<String> queue = new RandomizedQueue<String>();
 
         while (StdIn.hasNextLine())
             queue.enqueue(StdIn.readString());

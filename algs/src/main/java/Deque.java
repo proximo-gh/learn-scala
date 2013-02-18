@@ -27,7 +27,7 @@ public class Deque<Item> implements Iterable<Item> {
     public void addFirst(Item item) {
         checkNull(item);
 
-        Node<Item> node = new Node<>(item);
+        Node<Item> node = new Node<Item>(item);
 
         if (isEmpty())
             head = tail = node;
@@ -43,7 +43,7 @@ public class Deque<Item> implements Iterable<Item> {
     public void addLast(Item item) {
         checkNull(item);
 
-        Node<Item> node = new Node<>(item);
+        Node<Item> node = new Node<Item>(item);
 
         if (isEmpty())
             head = tail = node;
