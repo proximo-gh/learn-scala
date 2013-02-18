@@ -29,9 +29,10 @@ public class Deque<Item> implements Iterable<Item> {
 
         Node<Item> node = new Node<Item>(item);
 
-        if (isEmpty())
-            head = tail = node;
-        else {
+        if (isEmpty()) {
+            head = node;
+            tail = node;
+        } else {
             link(node, head);
             head = node;
         }
@@ -45,9 +46,10 @@ public class Deque<Item> implements Iterable<Item> {
 
         Node<Item> node = new Node<Item>(item);
 
-        if (isEmpty())
-            head = tail = node;
-        else {
+        if (isEmpty()) {
+            head = node;
+            tail = node;
+        } else {
             link(tail, node);
             tail = node;
         }

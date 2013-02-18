@@ -40,7 +40,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private int shrinkDelta() {
-        return size / 5;
+        return size / 10;
     }
 
     private void copyItems(int newCapacity) {
@@ -53,7 +53,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private int growFactor() {
-        return size / 2 + 1;
+        if (size == 0)
+            return 16;
+
+        return size / 2;
     }
 
     // delete and return a random item
