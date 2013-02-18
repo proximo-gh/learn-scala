@@ -58,7 +58,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private int growFactor() {
-        return size / 2;
+        return size / 2 + 1;
     }
 
     // delete and return a random item
