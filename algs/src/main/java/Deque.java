@@ -94,7 +94,7 @@ public class Deque<Item> implements Iterable<Item> {
     // return an iterator over items in order from front to end
     public Iterator<Item> iterator() {
         return new Iterator<Item>() {
-            Node<Item> current = head;
+            private Node<Item> current = head;
 
             @Override
             public boolean hasNext() {
@@ -107,7 +107,6 @@ public class Deque<Item> implements Iterable<Item> {
                     throw new NoSuchElementException("current is null");
 
                 Item item = current.item;
-
                 current = current.next;
 
                 return item;

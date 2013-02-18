@@ -10,8 +10,11 @@ public class Subset {
 
         RandomizedQueue<String> queue = new RandomizedQueue<String>();
 
-        while (StdIn.hasNextLine())
-            queue.enqueue(StdIn.readString());
+        for (String row : StdIn.readStrings()) {
+            for (String s : row.split(" ")) {
+                queue.enqueue(s);
+            }
+        }
 
         for (int i = 0; i < k; i++)
             StdOut.println(queue.dequeue());

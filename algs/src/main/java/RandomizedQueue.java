@@ -41,12 +41,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private void shrink() {
         if (items.length - size >= shrinkFactor())
-
             copyItems(size);
     }
 
     private int shrinkFactor() {
-        return 1;
+        return size / 2;
     }
 
     private void copyItems(int newCapacity) {
@@ -59,7 +58,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private int growFactor() {
-        return 1;
+        return size / 2;
     }
 
     // delete and return a random item
@@ -95,13 +94,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // return an independent iterator over items in random order
     public Iterator<Item> iterator() {
         return new Iterator<Item>() {
-
-            Object[] itItems;
-            int index;
+            private Object[] itItems;
+            private int index;
 
             {
                 itItems = new Object[size];
-
                 for (int i = 0; i < itItems.length; i++)
                     itItems[i] = items[i];
             }
@@ -115,7 +112,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             public Item next() {
                 if (index >= itItems.length)
                     throw new NoSuchElementException();
-
                 return (Item) itItems[index++];
             }
 
