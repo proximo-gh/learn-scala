@@ -3,7 +3,7 @@ import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
-    private Object[] items = new Object[0];
+    private Object[] items = new Object[2];
 
     private int size;
 
@@ -41,11 +41,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private void shrink() {
         if (items.length - size >= shrinkDelta())
-            copyItems(size);
+            copyItems(items.length / 2);
     }
 
     private int shrinkDelta() {
-        return size / 2 + 1;
+        return size / 4;
     }
 
     private void copyItems(int newCapacity) {
@@ -58,10 +58,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private int growFactor() {
-        if (size <= 1)
-            return 16;
-
-        return size / 2;
+        return size == 0 ? 1 : size;
     }
 
     // delete and return a random item
