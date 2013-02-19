@@ -29,9 +29,10 @@ public class Deque<Item> implements Iterable<Item> {
 
         Node<Item> node = new Node<Item>(item);
 
-        if (isEmpty())
-            head = tail = node;
-        else {
+        if (isEmpty()) {
+            head = node;
+            tail = node;
+        } else {
             link(node, head);
             head = node;
         }
@@ -45,9 +46,10 @@ public class Deque<Item> implements Iterable<Item> {
 
         Node<Item> node = new Node<Item>(item);
 
-        if (isEmpty())
-            head = tail = node;
-        else {
+        if (isEmpty()) {
+            head = node;
+            tail = node;
+        } else {
             link(tail, node);
             tail = node;
         }
@@ -97,30 +99,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // return an iterator over items in order from front to end
     public Iterator<Item> iterator() {
-        return new Iterator<Item>() {
-            private Node<Item> current = head;
-
-            @Override
-            public boolean hasNext() {
-                return current != null;
-            }
-
-            @Override
-            public Item next() {
-                if (current == null)
-                    throw new NoSuchElementException("current is null");
-
-                Item item = current.item;
-                current = current.next;
-
-                return item;
-            }
-
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException();
-            }
-        };
+        return new DequeIterator<Item>(head);
     }
 
     private void link(Node<Item> first, Node<Item> second) {
@@ -146,6 +125,35 @@ public class Deque<Item> implements Iterable<Item> {
 
         private Node(Item item) {
             this.item = item;
+        }
+    }
+
+    private class DequeIterator<Item> implements Iterator<Item> {
+        private Node<Item> current;
+
+        public DequeIterator(Node<Item> head) {
+            current = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public Item next() {
+            if (current == null)
+                throw new NoSuchElementException("current is null");
+
+            Item item = current.item;
+            current = current.next;
+
+            return item;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
         }
     }
 }
