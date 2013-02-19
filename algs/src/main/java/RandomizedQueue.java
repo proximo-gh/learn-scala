@@ -41,11 +41,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private void shrink() {
         if (items.length - size >= shrinkFactor())
-            copyItems(size);
+            copyItems(size / 2);
     }
 
     private int shrinkFactor() {
-        return size / 10;
+        return size / 4;
     }
 
     private void copyItems(int newCapacity) {
@@ -58,7 +58,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private int growFactor() {
-        return size / 2 + 1;
+        return size == 0 ? 1 : size;
     }
 
     // delete and return a random item
