@@ -44,13 +44,13 @@ public class Brute {
         for (int i = 0; i < points.length; i++) {
             Point p1 = points[i];
 
-            for (int j = i; j < points.length; j++) {
+            for (int j = i + 1; j < points.length; j++) {
                 Point p2 = points[j];
 
-                for (int k = j; k < points.length; k++) {
+                for (int k = j + 1; k < points.length; k++) {
                     Point p3 = points[k];
 
-                    for (int l = k; l < points.length; l++) {
+                    for (int l = k + 1; l < points.length; l++) {
                         Point p4 = points[l];
 
                         double s12 = p1.slopeTo(p2);
