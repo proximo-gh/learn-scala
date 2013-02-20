@@ -6,7 +6,38 @@
  */
 public class Brute {
     public static void main(String[] args) {
+        Point[] points = readPoints(args[0]);
 
+        draw(points);
+
+        // display to screen all at once
+        StdDraw.show();
+    }
+
+    private static Point[] readPoints(String filename) {
+        // rescale coordinates and turn on animation mode
+        StdDraw.setXscale(0, 32768);
+        StdDraw.setYscale(0, 32768);
+        StdDraw.show();
+
+        // read in the input
+        In in = new In(filename);
+        int N = in.readInt();
+        Point[] points = new Point[N];
+        for (int i = 0; i < N; i++) {
+            int x = in.readInt();
+            int y = in.readInt();
+
+            Point p = new Point(x, y);
+            p.draw();
+
+            points[i] = p;
+        }
+
+        // display to screen all at once
+        StdDraw.show();
+
+        return points;
     }
 
     public static void draw(Point[] points) {
@@ -31,6 +62,8 @@ public class Brute {
                             p2.drawTo(p3);
                             p3.drawTo(p4);
                         }
+
+                        System.out.println(i + " " + j + " " + k + " " + l);
                     }
                 }
             }
