@@ -62,8 +62,6 @@ public class Brute {
                             p2.drawTo(p3);
                             p3.drawTo(p4);
                         }
-
-                        System.out.println(i + " " + j + " " + k + " " + l);
                     }
                 }
             }
