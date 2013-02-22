@@ -51,23 +51,27 @@ public class Point implements Comparable<Point> {
                 return Double.NEGATIVE_INFINITY;
             else
                 return Double.POSITIVE_INFINITY;
-        } else if (y == that.y)
-            return +0.0;
-        else {
-            double dy = that.y - y;
-            double dx = that.x - x;
+        } else {
+            if (y == that.y)
+                return +0.0;
+            else {
+                double dy = that.y - y;
+                double dx = that.x - x;
 
-            return dy / dx;
+                return dy / dx;
+            }
         }
     }
 
     // is this point lexicographically smaller than that one?
     // comparing y-coordinates and breaking ties by x-coordinates
     public int compareTo(Point that) {
-        if (y == that.y)
-            return Integer.compare(x, that.x);
-        else
-            return Integer.compare(y, that.y);
+        int cy = Integer.compare(y, that.y);
+
+        if (cy != 0)
+            return cy;
+
+        return Integer.compare(x, that.x);
     }
 
     // return string representation of this point

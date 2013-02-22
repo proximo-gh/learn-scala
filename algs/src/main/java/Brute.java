@@ -14,7 +14,7 @@ public class Brute {
         StdDraw.show();
     }
 
-    private static Point[] readPoints(String filename) {
+    public static Point[] readPoints(String filename) {
         // rescale coordinates and turn on animation mode
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
