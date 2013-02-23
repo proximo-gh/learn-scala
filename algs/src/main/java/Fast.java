@@ -15,37 +15,51 @@ public class Fast {
 
     private static void draw(Point[] points) {
         for (Point point : points) {
-            Point[] clone = new Point[points.length];
-            System.arraycopy(points, 0, clone, 0, points.length);
+            Point[] clone = Arrays.copyOf(points, points.length);
             Arrays.sort(clone, point.SLOPE_ORDER);
+
             System.out.println("point = " + point);
             System.out.println(Arrays.toString(clone));
-            int i;
-
-            for (i = 0; i < clone.length; i++) {
-                Point p = clone[i];
-
-                if (p.compareTo(point) == 0)
-                    break;
+            for (Point p : clone) {
+                System.out.print(point.slopeTo(p) + " ");
             }
 
-            if (clone.length - i >= 4) {
-                Point p1 = clone[i];
-                Point p2 = clone[i + 1];
-                Point p3 = clone[i + 2];
-                Point p4 = clone[i + 3];
+            System.out.println();
 
-                double s12 = p1.slopeTo(p2);
-                double s13 = p1.slopeTo(p3);
-                double s14 = p1.slopeTo(p4);
+            int i = 0;
+            int c = 1;
+            double s = Double.NaN;
 
-                if (s12 == s13 && s13 == s14) {
-                    p1.drawTo(p2);
-                    p2.drawTo(p3);
-                    p3.drawTo(p4);
+            for (Point p : clone) {
+                double slope = point.slopeTo(p);
+                if (slope == s) {
+                    c++;
+                } else {
+                    if (c >= 4)
+                        break;
+
+                    c = 1;
+                    s = slope;
                 }
 
+                i++;
+            }
+
+            System.out.println("c = " + c);
+            System.out.println();
+
+            if (c >= 4) {
+                while (c > 0) {
+                    clone[i - c].drawTo(clone[i - c - 1]);
+                    c--;
+                }
             }
         }
+    }
+
+    private static void printLine(Point p1, Point p2, Point p3, Point p4) {
+        System.out.println();
+        System.out.println("" + p1 + " to " + p2 + " to " + p3 + " to " + p4);
+        System.out.println();
     }
 }
