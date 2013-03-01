@@ -67,7 +67,7 @@ public class Fast {
         System.out.println();
     }
 
-    public static boolean stolen(String[] args) {
+    private static boolean stolen(String[] args) {
         int nPoints, x, y, i, j, k, l, cont, m, n = 0;
         double value;
         Point[] points;
@@ -75,6 +75,7 @@ public class Fast {
 
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
+
         try {
             In in = new In(args[0]);
             nPoints = Integer.parseInt(in.readLine());

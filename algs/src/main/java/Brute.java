@@ -58,9 +58,18 @@ public class Brute {
                         double s14 = p1.slopeTo(p4);
 
                         if (s12 == s13 && s13 == s14) {
+                            StdOut.print(p1);
+
                             p1.drawTo(p2);
+                            StdOut.print(" -> " + p2);
+
                             p2.drawTo(p3);
+                            StdOut.print(" -> " + p3);
+
                             p3.drawTo(p4);
+                            StdOut.print(" -> " + p4);
+
+                            StdOut.println();
                         }
                     }
                 }
