@@ -66,12 +66,16 @@ public class Point implements Comparable<Point> {
     // is this point lexicographically smaller than that one?
     // comparing y-coordinates and breaking ties by x-coordinates
     public int compareTo(Point that) {
-        int cy = Integer.compare(y, that.y);
+        int cy = compare(y, that.y);
 
         if (cy != 0)
             return cy;
 
-        return Integer.compare(x, that.x);
+        return compare(x, that.x);
+    }
+
+    private static int compare(int x, int y) {
+        return (x < y) ? -1 : ((x == y) ? 0 : 1);
     }
 
     // return string representation of this point
