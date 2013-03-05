@@ -12,9 +12,11 @@ public class Fast {
         if (stolen(args))
             return;
 
+/*
         Point[] points = Brute.readPoints(args[0]);
 
         draw(points);
+*/
     }
 
     private static void draw(Point[] points) {
