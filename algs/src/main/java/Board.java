@@ -1,8 +1,21 @@
 public class Board {
+
+
+    private final int[][] blocks;
+    private final int N;
+
     // construct a board from an N-by-N array of blocks
     // (where blocks[i][j] = block in row i, column j)
     public Board(int[][] blocks) {
+        if (blocks == null)
+            throw new IllegalArgumentException("blocks is null");
 
+        N = blocks.length;
+        this.blocks = new int[N][N];
+
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
+                this.blocks[i][j] = blocks[i][j];
     }
 
     // board dimension N
