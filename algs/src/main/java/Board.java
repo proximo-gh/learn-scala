@@ -48,7 +48,9 @@ public class Board {
     }
 
     int[] numToPosition(int num) {
-        return new int[]{num / N, num % N};
+        if (num == 0)
+            num = N * N;
+        return new int[]{(num - 1) / N, (num - 1) % N};
     }
 
     int positionToNum(int i, int j) {
