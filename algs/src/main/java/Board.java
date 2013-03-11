@@ -91,21 +91,26 @@ public class Board {
         int i0 = pos[0];
         int j0 = pos[1];
 
-        Board n;
-        n = neighbor(i0, j0, 1, 0);
-        if (n != null)
-            result.enqueue(n);
-        n = neighbor(i0, j0, -1, 0);
-        if (n != null)
-            result.enqueue(n);
-        n = neighbor(i0, j0, 0, 1);
-        if (n != null)
-            result.enqueue(n);
-        n = neighbor(i0, j0, 0, -1);
-        if (n != null)
-            result.enqueue(n);
+        addNeighbor(result, i0, j0, 1, 0);
+        addNeighbor(result, i0, j0, -1, 0);
+        addNeighbor(result, i0, j0, 0, 1);
+        addNeighbor(result, i0, j0, 0, -1);
 
         return result;
+    }
+
+    private void addNeighbor(Queue<Board> result, int i0, int j0, int di, int dj) {
+        int i1 = i0 + di;
+        int j1 = j0 + dj;
+        if (i1 < N && j1 < N && i1 >= 0 && j1 >= 0) {
+            Board board = new Board(this.tiles);
+
+            int tmp = board.tiles[i1][j1];
+            board.tiles[i1][j1] = board.tiles[i0][j0];
+            board.tiles[i0][j0] = tmp;
+
+            result.enqueue(board);
+        }
     }
 
     private int[] zeroPos() {
@@ -120,19 +125,6 @@ public class Board {
                     break;
                 }
         return pos;
-    }
-
-    private Board neighbor(int i, int j, int di, int dj) {
-        if (i + di >= N || j + dj >= N || i + di < 0 || j + dj < 0)
-            return null;
-
-        Board board = new Board(this.tiles);
-
-        int tmp = board.tiles[i + di][j + dj];
-        board.tiles[i + di][j + dj] = board.tiles[i][j];
-        board.tiles[i][j] = tmp;
-
-        return board;
     }
 
     @Override
