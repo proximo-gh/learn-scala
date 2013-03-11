@@ -86,16 +86,10 @@ public class Board {
     public Iterable<Board> neighbors() {
         Queue<Board> result = new Queue<Board>();
 
-        int i0 = Integer.MIN_VALUE;
-        int j0 = Integer.MIN_VALUE;
-        for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
-                if (this.tiles[i][j] == 0) {
-                    i0 = i;
-                    j0 = j;
+        int[] pos = zeroPos();
 
-                    break;
-                }
+        int i0 = pos[0];
+        int j0 = pos[1];
 
         Board n;
         n = neighbor(i0, j0, 1, 0);
@@ -112,6 +106,20 @@ public class Board {
             result.enqueue(n);
 
         return result;
+    }
+
+    private int[] zeroPos() {
+        int[] pos = new int[]{Integer.MIN_VALUE, Integer.MIN_VALUE};
+
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
+                if (this.tiles[i][j] == 0) {
+                    pos[0] = i;
+                    pos[1] = j;
+
+                    break;
+                }
+        return pos;
     }
 
     private Board neighbor(int i, int j, int di, int dj) {
