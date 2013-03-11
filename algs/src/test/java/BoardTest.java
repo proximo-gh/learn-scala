@@ -110,7 +110,7 @@ public class BoardTest {
         assertEquals(expected.size(), Iterables.size(actual));
 
         for (Board board : actual) {
-            if (!expected.contains(actual))
+            if (!expected.contains(board))
                 throw new AssertionError("board not found in expected: " + board);
             else
                 expected.remove(actual);
