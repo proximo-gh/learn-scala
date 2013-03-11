@@ -29,7 +29,7 @@ public class Board {
 
         for (int i = 0; i < N; i++)
             for (int j = 0; j < N; j++)
-                if (this.tiles[i][j] != i / N + j)
+                if (this.tiles[i][j] != positionToNum(i, j))
                     result++;
 
         return result;
@@ -41,16 +41,27 @@ public class Board {
 
         for (int i = 0; i < N; i++)
             for (int j = 0; j < N; j++)
-                if (this.tiles[i][j] != i / N + j)
+                if (this.tiles[i][j] != positionToNum(i, j))
                     result++;
 
         return result;
     }
 
+    int[] numToPosition(int num) {
+        return new int[]{num / N, num % N};
+    }
+
+    int positionToNum(int i, int j) {
+        if (i == N - 1 && j == N - 1)
+            return 0;
+
+        return i * N + j + 1;
+    }
+
     public boolean isGoal() {
         for (int i = 0; i < N; i++)
             for (int j = 0; j < N; j++)
-                if (this.tiles[i][j] != i / N + j)
+                if (this.tiles[i][j] != positionToNum(i, j))
                     return false;
 
         return true;
