@@ -1,7 +1,6 @@
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,5 +37,20 @@ public class BoardTest {
         assertEquals(7, board.positionToNum(2, 0));
         assertEquals(8, board.positionToNum(2, 1));
         assertEquals(0, board.positionToNum(2, 2));
+    }
+
+    @Test
+    public void testGoal() throws Exception {
+        Board goalBoard = new Board(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 0}});
+        assertTrue(goalBoard.isGoal());
+
+        Board failBoard1 = new Board(new int[][]{{1, 3, 2}, {4, 5, 6}, {7, 8, 0}});
+        assertFalse(failBoard1.isGoal());
+
+        Board failBoard2 = new Board(new int[][]{{1, 2, 3}, {6, 5, 4}, {7, 8, 0}});
+        assertFalse(failBoard1.isGoal());
+
+        Board failBoard3 = new Board(new int[][]{{1, 2, 3}, {4, 5, 6}, {0, 7, 8}});
+        assertFalse(failBoard1.isGoal());
     }
 }
