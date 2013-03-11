@@ -28,9 +28,12 @@ public class Board {
         int result = 0;
 
         for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
-                if (this.tiles[i][j] != positionToNum(i, j))
+            for (int j = 0; j < N; j++) {
+                int current = this.tiles[i][j];
+
+                if (current != 0 && current != positionToNum(i, j))
                     result++;
+            }
 
         return result;
     }
@@ -40,9 +43,14 @@ public class Board {
         int result = 0;
 
         for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
-                if (this.tiles[i][j] != positionToNum(i, j))
-                    result++;
+            for (int j = 0; j < N; j++) {
+                int current = tiles[i][j];
+                if (current != 0) {
+                    int[] pos = numToPosition(current);
+                    int d = Math.abs(i - pos[0]) + Math.abs(j - pos[1]);
+                    result += d;
+                }
+            }
 
         return result;
     }
