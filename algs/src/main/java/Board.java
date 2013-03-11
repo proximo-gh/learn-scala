@@ -82,6 +82,51 @@ public class Board {
         return null;
     }
 
+    // all neighboring boards
+    public Iterable<Board> neighbors() {
+        Queue<Board> result = new Queue<Board>();
+
+        int i0 = Integer.MIN_VALUE;
+        int j0 = Integer.MIN_VALUE;
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
+                if (this.tiles[i][j] == 0) {
+                    i0 = i;
+                    j0 = j;
+
+                    break;
+                }
+
+        Board n;
+        n = neighbor(i0, j0, 1, 0);
+        if (n != null)
+            result.enqueue(n);
+        n = neighbor(i0, j0, -1, 0);
+        if (n != null)
+            result.enqueue(n);
+        n = neighbor(i0, j0, 0, 1);
+        if (n != null)
+            result.enqueue(n);
+        n = neighbor(i0, j0, 0, -1);
+        if (n != null)
+            result.enqueue(n);
+
+        return result;
+    }
+
+    private Board neighbor(int i, int j, int di, int dj) {
+        if (i + di >= N || j + dj >= N || i + di < 0 || j + dj < 0)
+            return null;
+
+        Board board = new Board(this.tiles);
+
+        int tmp = board.tiles[i + di][j + dj];
+        board.tiles[i + di][j + dj] = board.tiles[i][j];
+        board.tiles[i][j] = tmp;
+
+        return board;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,11 +147,6 @@ public class Board {
     @Override
     public int hashCode() {
         return N;
-    }
-
-    // all neighboring boards
-    public Iterable<Board> neighbors() {
-        return null;
     }
 
     // string representation of the board (in the output format specified below)

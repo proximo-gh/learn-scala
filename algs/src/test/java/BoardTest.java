@@ -82,4 +82,9 @@ public class BoardTest {
                         new Board(new int[][]{{1, 4, 6}, {7, 5, 0}, {3, 8, 2}})));
 
     }
+
+    @Test
+    public void testDimension() throws Exception {
+        assertEquals(3, new Board(new int[3][3]).dimension());
+    }
 }
