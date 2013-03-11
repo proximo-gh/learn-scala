@@ -1,4 +1,9 @@
+import com.google.common.collect.Iterables;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
@@ -86,5 +91,29 @@ public class BoardTest {
     @Test
     public void testDimension() throws Exception {
         assertEquals(3, new Board(new int[3][3]).dimension());
+    }
+
+    @Test
+    public void testNeighbors() throws Exception {
+        Board board = new Board(new int[][]{{8, 1, 3}, {4, 2, 0}, {7, 6, 5}});
+        Collection<Board> expected = Arrays.asList(
+                new Board(new int[][]{{8, 1, 0}, {4, 2, 3}, {7, 6, 5}}),
+                new Board(new int[][]{{8, 1, 3}, {4, 2, 5}, {7, 6, 0}}),
+                new Board(new int[][]{{8, 1, 3}, {4, 0, 2}, {7, 6, 5}})
+        );
+
+        assertNeighbors(expected, board.neighbors());
+    }
+
+    private static void assertNeighbors(Collection<Board> expected, Iterable<Board> actual) {
+        expected = new LinkedList<Board>(expected);
+        assertEquals(expected.size(), Iterables.size(actual));
+
+        for (Board board : actual) {
+            if (!expected.contains(actual))
+                throw new AssertionError("board not found in expected: " + board);
+            else
+                expected.remove(actual);
+        }
     }
 }
