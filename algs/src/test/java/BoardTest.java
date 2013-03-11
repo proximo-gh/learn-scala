@@ -48,9 +48,9 @@ public class BoardTest {
         assertFalse(failBoard1.isGoal());
 
         Board failBoard2 = new Board(new int[][]{{1, 2, 3}, {6, 5, 4}, {7, 8, 0}});
-        assertFalse(failBoard1.isGoal());
+        assertFalse(failBoard2.isGoal());
 
         Board failBoard3 = new Board(new int[][]{{1, 2, 3}, {4, 5, 6}, {0, 7, 8}});
-        assertFalse(failBoard1.isGoal());
+        assertFalse(failBoard3.isGoal());
     }
 }
