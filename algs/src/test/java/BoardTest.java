@@ -71,4 +71,15 @@ public class BoardTest {
         board = new Board(new int[][]{{8, 1, 3}, {4, 0, 2}, {7, 6, 5}});
         assertEquals(10, board.manhattan());
     }
+
+    @Test
+    public void testEquals() throws Exception {
+        assertEquals(
+                new Board(new int[][]{{1, 4, 6}, {3, 5, 0}, {7, 8, 2}}),
+                new Board(new int[][]{{1, 4, 6}, {3, 5, 0}, {7, 8, 2}}));
+        assertFalse(
+                new Board(new int[][]{{1, 4, 6}, {3, 5, 0}, {7, 8, 2}}).equals(
+                        new Board(new int[][]{{1, 4, 6}, {7, 5, 0}, {3, 8, 2}})));
+
+    }
 }
