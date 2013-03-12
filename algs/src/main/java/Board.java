@@ -84,8 +84,12 @@ public class Board {
         int[] pos = findZero();
 
         int i0 = pos[0];
-        int j0 = pos[1];
 
+        int i = i0 == 0 ? 1 : 0;
+
+        int tmp = board.tiles[i][0];
+        board.tiles[i][0] = board.tiles[i][1];
+        board.tiles[i][1] = tmp;
 
         return board;
     }
