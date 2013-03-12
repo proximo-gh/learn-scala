@@ -22,8 +22,6 @@ public class Solver {
         }
     };
 
-    private int moves;
-
     private Node goalNode;
 
     // find a solution to the initial board (using the A* algorithm)
@@ -41,9 +39,10 @@ public class Solver {
                 if (current.previous != null && !neighbor.equals(current.previous.board))
                     pq.insert(new Node(current, neighbor, current.moves + 1));
         }
-        while (!current.board.isGoal());
+        while (!pq.isEmpty() && !current.board.isGoal());
 
-        goalNode = current;
+        if (current.board.isGoal())
+            goalNode = current;
     }
 
     // is the initial board solvable?
@@ -77,9 +76,9 @@ public class Solver {
     }
 
     private static class Node {
-        final Node previous;
-        final Board board;
-        final int moves;
+        private final Node previous;
+        private final Board board;
+        private final int moves;
 
         private Node(Node previous, Board board, int moves) {
             this.previous = previous;
