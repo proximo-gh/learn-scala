@@ -30,20 +30,27 @@ public class Solver {
 
         pq.insert(new Node(null, initial, 0));
 
+        boolean goal;
+
         Node current;
 
         do {
             current = pq.delMin();
 
+            goal = current.board.isGoal();
+
+            if (goal)
+                break;
+
             Node previous = current.previous;
 
             for (Board neighbor : current.board.neighbors())
-                if (previous != null && !neighbor.equals(previous.board))
+                if (previous == null || !neighbor.equals(previous.board))
                     pq.insert(new Node(current, neighbor, current.moves + 1));
         }
-        while (!pq.isEmpty() && !current.board.isGoal());
+        while (!pq.isEmpty());
 
-        if (current.board.isGoal())
+        if (goal)
             goalNode = current;
     }
 
