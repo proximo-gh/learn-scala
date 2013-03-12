@@ -42,11 +42,13 @@ public class Solver {
                     pq.insert(new Node(current, neighbor, current.moves + 1));
         }
         while (!current.board.isGoal());
+
+        goalNode = current;
     }
 
     // is the initial board solvable?
     public boolean isSolvable() {
-        return false;
+        return goalNode != null;
     }
 
     // min number of moves to solve initial board; -1 if no solution
@@ -59,7 +61,19 @@ public class Solver {
 
     // sequence of boards in a shortest solution; null if no solution
     public Iterable<Board> solution() {
-        return null;
+        if (goalNode == null)
+            return null;
+
+        Stack<Board> result = new Stack<Board>();
+
+        Node node = goalNode;
+
+        while (node != null) {
+            result.push(node.board);
+            node = node.previous;
+        }
+
+        return result;
     }
 
     private static class Node {
