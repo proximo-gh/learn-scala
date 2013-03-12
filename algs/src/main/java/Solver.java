@@ -27,8 +27,10 @@ public class Solver {
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         MinPQ<Node> pq = new MinPQ<Node>(COMPARATOR);
+        MinPQ<Node> tpq = new MinPQ<Node>(COMPARATOR);
 
         pq.insert(new Node(null, initial, 0));
+        tpq.insert(new Node(null, initial.twin(), 0));
 
         boolean goal;
 
@@ -42,16 +44,25 @@ public class Solver {
             if (goal)
                 break;
 
-            Node previous = current.previous;
+            Node currentTwin = tpq.delMin();
+            if (currentTwin.board.isGoal())
+                break;
 
-            for (Board neighbor : current.board.neighbors())
-                if (previous == null || !neighbor.equals(previous.board))
-                    pq.insert(new Node(current, neighbor, current.moves + 1));
+            addNeighbors(pq, current);
+            addNeighbors(tpq, currentTwin);
         }
-        while (!pq.isEmpty());
+        while (!pq.isEmpty() || !tpq.isEmpty());
 
         if (goal)
             goalNode = current;
+    }
+
+    private void addNeighbors(MinPQ<Node> pq, Node current) {
+        Node previous = current.previous;
+
+        for (Board neighbor : current.board.neighbors())
+            if (previous == null || !neighbor.equals(previous.board))
+                pq.insert(new Node(current, neighbor, current.moves + 1));
     }
 
     // is the initial board solvable?
