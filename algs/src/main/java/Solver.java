@@ -2,7 +2,7 @@ import java.util.Comparator;
 
 public class Solver {
 
-    private static final Comparator<Node> MANHATTAN_PRIORITY = new Comparator<Node>() {
+    private static final Comparator<Node> COMPARATOR = new Comparator<Node>() {
         @Override
         public int compare(Node o1, Node o2) {
             return compare(val(o1), val(o2));
@@ -26,7 +26,7 @@ public class Solver {
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
-        MinPQ<Node> pq = new MinPQ<Node>(MANHATTAN_PRIORITY);
+        MinPQ<Node> pq = new MinPQ<Node>(COMPARATOR);
 
         pq.insert(new Node(null, initial, 0));
 
@@ -35,8 +35,10 @@ public class Solver {
         do {
             current = pq.delMin();
 
+            Node previous = current.previous;
+
             for (Board neighbor : current.board.neighbors())
-                if (current.previous != null && !neighbor.equals(current.previous.board))
+                if (previous != null && !neighbor.equals(previous.board))
                     pq.insert(new Node(current, neighbor, current.moves + 1));
         }
         while (!pq.isEmpty() && !current.board.isGoal());
