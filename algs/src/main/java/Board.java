@@ -85,7 +85,11 @@ public class Board {
 
         int i0 = pos[0];
 
-        int i = i0 == 0 ? 1 : 0;
+        int i;
+        if (i0 == 0)
+            i = 1;
+        else
+            i = 0;
 
         int tmp = board.tiles[i][0];
         board.tiles[i][0] = board.tiles[i][1];

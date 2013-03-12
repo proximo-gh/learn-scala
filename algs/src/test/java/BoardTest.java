@@ -75,6 +75,14 @@ public class BoardTest {
         assertNeighbors(expected, board.neighbors());
     }
 
+    @Test
+    public void testTwin() throws Exception {
+        Board board = new Board(new int[][]{{8, 1, 3}, {4, 2, 0}, {7, 6, 5}});
+        Board expected = new Board(new int[][]{{1, 8, 3}, {4, 2, 0}, {7, 6, 5}});
+
+        assertEquals(expected, board.twin());
+    }
+
     private static void assertNeighbors(Collection<Board> expected, Iterable<Board> actual) {
         expected = new LinkedList<Board>(expected);
         assertEquals(expected.size(), Iterables.size(actual));
