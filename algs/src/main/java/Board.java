@@ -1,6 +1,5 @@
 public class Board {
 
-
     private final int[][] tiles;
     private final int N;
 
@@ -55,13 +54,14 @@ public class Board {
         return result;
     }
 
-    int[] numToPosition(int num) {
+    private int[] numToPosition(int n) {
+        int num = n;
         if (num == 0)
             num = N * N;
         return new int[]{(num - 1) / N, (num - 1) % N};
     }
 
-    int positionToNum(int i, int j) {
+    private int positionToNum(int i, int j) {
         if (i == N - 1 && j == N - 1)
             return 0;
 
@@ -79,14 +79,22 @@ public class Board {
 
     // a board obtained by exchanging two adjacent blocks in the same row
     public Board twin() {
-        return null;
+        Board board = new Board(this.tiles);
+
+        int[] pos = findZero();
+
+        int i0 = pos[0];
+        int j0 = pos[1];
+
+
+        return board;
     }
 
     // all neighboring boards
     public Iterable<Board> neighbors() {
         Queue<Board> result = new Queue<Board>();
 
-        int[] pos = zeroPos();
+        int[] pos = findZero();
 
         int i0 = pos[0];
         int j0 = pos[1];
@@ -113,7 +121,7 @@ public class Board {
         }
     }
 
-    private int[] zeroPos() {
+    private int[] findZero() {
         int[] pos = new int[]{Integer.MIN_VALUE, Integer.MIN_VALUE};
 
         for (int i = 0; i < N; i++)
@@ -142,11 +150,6 @@ public class Board {
                     return false;
 
         return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return N;
     }
 
     // string representation of the board (in the output format specified below)
