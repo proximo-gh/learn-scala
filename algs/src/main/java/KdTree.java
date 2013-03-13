@@ -34,9 +34,9 @@ public class KdTree {
         else {
             Node node = root;
 
-            while (node != null) {
+            while (true) {
                 if (node.value.equals(p))
-                    break;
+                    return;
                 int cmp = node.comparator.compare(node.value, p);
 
                 if (cmp <= 0) {
