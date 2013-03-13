@@ -77,7 +77,7 @@ public class KdTree {
 
     // does the set contain the point p?
     public boolean contains(Point2D p) {
-        return false;
+        return find(p) != null;
     }
 
     // draw all of the points to standard draw
@@ -86,12 +86,39 @@ public class KdTree {
 
     // all points in the set that are inside the rectangle
     public Iterable<Point2D> range(RectHV rect) {
-        return null;
+        Queue<Point2D> result = new Queue<Point2D>();
+
+        find(rect, root, result);
+
+        return result;
+    }
+
+    private void find(RectHV rect, Node node, Queue<Point2D> result) {
+        if (node == null)
+            return;
+
+        Point2D value = node.value;
+
+        if (rect.contains(value)) {
+            result.enqueue(value);
+        }
+
+        if (node.comparator == Point2D.Y_ORDER) {
+            if (rect.ymin() <= value.y())
+                find(rect, node.left, result);
+            if (rect.ymax() >= value.y())
+                find(rect, node.right, result);
+        } else if (node.comparator == Point2D.X_ORDER) {
+            if (rect.xmin() <= value.x())
+                find(rect, node.left, result);
+            if (rect.xmax() >= value.x())
+                find(rect, node.right, result);
+        }
     }
 
     // a nearest neighbor in the set to p; null if set is empty
     public Point2D nearest(Point2D p) {
-        return null;
+        return root == null ? null : root.value;
     }
 
     private static class Node {
