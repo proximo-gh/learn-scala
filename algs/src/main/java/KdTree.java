@@ -1,19 +1,8 @@
 import java.util.Comparator;
 
 public class KdTree {
-    private static final Comparator<Point2D> BY_X = new Comparator<Point2D>() {
-        @Override
-        public int compare(Point2D o1, Point2D o2) {
-            return Double.compare(o1.x(), o2.x());
-        }
-    };
-
-    private static final Comparator<Point2D> BY_Y = new Comparator<Point2D>() {
-        @Override
-        public int compare(Point2D o1, Point2D o2) {
-            return Double.compare(o1.y(), o2.y());
-        }
-    };
+    private Node root;
+    private int size;
 
     // construct an empty set of points
     public KdTree() {
@@ -21,16 +10,69 @@ public class KdTree {
 
     // is the set empty?
     public boolean isEmpty() {
-        return true;
+        return root == null;
     }
 
     // number of points in the set
     public int size() {
-        return 0;
+        return size;
+    }
+
+    private static Comparator<Point2D> next(Comparator<Point2D> comparator) {
+        if (comparator == Point2D.X_ORDER)
+            return Point2D.Y_ORDER;
+        else if (comparator == Point2D.Y_ORDER)
+            return Point2D.X_ORDER;
+
+        throw new IllegalStateException("Unknown comparator = " + comparator);
     }
 
     // add the point p to the set (if it is not already in the set)
     public void insert(Point2D p) {
+        if (root == null)
+            root = new Node(p, Point2D.X_ORDER);
+        else {
+            Node node = root;
+
+            while (node != null) {
+                if (node.value.equals(p))
+                    break;
+                int cmp = node.comparator.compare(node.value, p);
+
+                if (cmp <= 0) {
+                    if (node.left == null) {
+                        node.left = new Node(p, next(node.comparator));
+                        break;
+                    } else
+                        node = node.left;
+                } else {
+                    if (node.right == null) {
+                        node.right = new Node(p, next(node.comparator));
+                        break;
+                    } else
+                        node = node.right;
+                }
+            }
+        }
+
+        size++;
+    }
+
+    private Node find(Point2D p) {
+        Node node = root;
+
+        while (node != null) {
+            if (node.value.equals(p))
+                return node;
+            int cmp = node.comparator.compare(node.value, p);
+
+            if (cmp <= 0)
+                node = node.left;
+            else
+                node = node.right;
+        }
+
+        return null;
     }
 
     // does the set contain the point p?
