@@ -37,7 +37,7 @@ public class KdTree {
             while (true) {
                 if (node.value.equals(p))
                     return;
-                int cmp = node.comparator.compare(node.value, p);
+                int cmp = node.comparator.compare(p, node.value);
 
                 if (cmp <= 0) {
                     if (node.left == null) {
@@ -64,7 +64,7 @@ public class KdTree {
         while (node != null) {
             if (node.value.equals(p))
                 return node;
-            int cmp = node.comparator.compare(node.value, p);
+            int cmp = node.comparator.compare(p, node.value);
 
             if (cmp <= 0)
                 node = node.left;
@@ -130,6 +130,13 @@ public class KdTree {
         private Node(Point2D value, Comparator<Point2D> comparator) {
             this.value = value;
             this.comparator = comparator;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    '}';
         }
     }
 }
