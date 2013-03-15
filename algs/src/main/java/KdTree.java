@@ -140,9 +140,9 @@ public class KdTree {
         double dx;
 
         if (node.comparator == Point2D.X_ORDER)
-            dx = node.value.x() - x;
+            dx = node.x - x;
         else
-            dx = node.value.y() - y;
+            dx = node.y - y;
 
         double dx2 = dx * dx;
 
@@ -167,10 +167,14 @@ public class KdTree {
         private Comparator<Point2D> comparator;
         private Node left;
         private Node right;
+        private double x;
+        private double y;
 
         private Node(Point2D value, Comparator<Point2D> comparator) {
             this.value = value;
             this.comparator = comparator;
+            x = value.x();
+            y = value.y();
         }
 
         @Override
