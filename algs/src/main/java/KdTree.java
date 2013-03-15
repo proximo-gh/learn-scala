@@ -146,20 +146,18 @@ public class KdTree {
                 return best;
         }
 
-        Point2D bestLeft = nearest(dx > 0 ? node.left : node.right, p, best, bestDistance);
+        Point2D bestChild = nearest(dx > 0 ? node.left : node.right, p, best, bestDistance);
 
-        if (best != bestLeft) {
-            bestDistance = bestLeft.distanceSquaredTo(p);
-            best = bestLeft;
+        if (best != bestChild) {
+            bestDistance = bestChild.distanceSquaredTo(p);
+            best = bestChild;
         }
 
-        Point2D bestRight = null;
-
         if (dx2 < bestDistance)
-            bestRight = nearest(dx > 0 ? node.right : node.left, p, best, bestDistance);
+            bestChild = nearest(dx > 0 ? node.right : node.left, p, best, bestDistance);
 
-        if (best != bestRight)
-            return bestRight;
+        if (best != bestChild)
+            return bestChild;
 
         return best;
     }
