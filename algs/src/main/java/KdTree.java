@@ -123,7 +123,7 @@ public class KdTree {
 
     private Point2D nearest(Node node, Point2D p, Point2D min, double minDistance) {
         if (node == null)
-            return null;
+            return min;
 
         Point2D best = min;
         double bestDistance = minDistance;
@@ -144,21 +144,24 @@ public class KdTree {
 
             if (bestDistance == 0)
                 return best;
-        } else
-            best = null;
+        }
 
-        best = nearest(dx > 0 ? node.left : node.right, p, best, bestDistance);
+        Point2D bestLeft = nearest(dx > 0 ? node.left : node.right, p, best, bestDistance);
 
-        if (best != null)
-            bestDistance = best.distanceSquaredTo(p);
+        if (best != bestLeft) {
+            bestDistance = bestLeft.distanceSquaredTo(p);
+            best = bestLeft;
+        }
+
+        Point2D bestRight = null;
 
         if (dx2 < bestDistance)
-            best = nearest(dx > 0 ? node.right : node.left, p, best, bestDistance);
+            bestRight = nearest(dx > 0 ? node.right : node.left, p, best, bestDistance);
 
-        if (best == null)
-            return min;
-        else
-            return best;
+        if (best != bestRight)
+            return bestRight;
+
+        return best;
     }
 
     private static class Node {
