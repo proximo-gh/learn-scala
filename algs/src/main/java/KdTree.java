@@ -118,10 +118,10 @@ public class KdTree {
 
     // a nearest neighbor in the set to p; null if set is empty
     public Point2D nearest(Point2D p) {
-        return nearest(root, p, null, Double.POSITIVE_INFINITY);
+        return nearest(root, p, p.x(), p.y(), null, Double.POSITIVE_INFINITY);
     }
 
-    private Point2D nearest(Node node, Point2D p, Point2D min, double minDistance) {
+    private Point2D nearest(Node node, Point2D p, double x, double y, Point2D min, double minDistance) {
         if (node == null)
             return min;
 
@@ -140,13 +140,13 @@ public class KdTree {
         double dx;
 
         if (node.comparator == Point2D.X_ORDER)
-            dx = node.value.x() - p.x();
+            dx = node.value.x() - x;
         else
-            dx = node.value.y() - p.y();
+            dx = node.value.y() - y;
 
         double dx2 = dx * dx;
 
-        Point2D bestChild = nearest(dx > 0 ? node.left : node.right, p, best, bestDistance);
+        Point2D bestChild = nearest(dx > 0 ? node.left : node.right, p, x, y, best, bestDistance);
 
         if (best != bestChild) {
             bestDistance = bestChild.distanceSquaredTo(p);
@@ -154,7 +154,7 @@ public class KdTree {
         }
 
         if (dx2 < bestDistance)
-            bestChild = nearest(dx > 0 ? node.right : node.left, p, best, bestDistance);
+            bestChild = nearest(dx > 0 ? node.right : node.left, p, x, y, best, bestDistance);
 
         if (best != bestChild)
             return bestChild;
