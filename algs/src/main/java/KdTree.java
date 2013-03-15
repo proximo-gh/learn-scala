@@ -129,6 +129,14 @@ public class KdTree {
         double bestDistance = minDistance;
 
         double d = node.value.distanceSquaredTo(p);
+        if (best == null || d < bestDistance) {
+            bestDistance = d;
+            best = node.value;
+
+            if (bestDistance == 0)
+                return best;
+        }
+
         double dx;
 
         if (node.comparator == Point2D.X_ORDER)
@@ -137,14 +145,6 @@ public class KdTree {
             dx = node.value.y() - p.y();
 
         double dx2 = dx * dx;
-
-        if (best == null || d < bestDistance) {
-            bestDistance = d;
-            best = node.value;
-
-            if (bestDistance == 0)
-                return best;
-        }
 
         Point2D bestChild = nearest(dx > 0 ? node.left : node.right, p, best, bestDistance);
 
