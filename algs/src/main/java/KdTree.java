@@ -118,7 +118,14 @@ public class KdTree {
 
     // a nearest neighbor in the set to p; null if set is empty
     public Point2D nearest(Point2D p) {
-        return root == null ? null : root.value;
+        if (root == null)
+            return null;
+
+        return find(p, root, root.value, p.distanceSquaredTo(root.value));
+    }
+
+    private Point2D find(Point2D p, Node node, Point2D min, double minDistance) {
+        return min;
     }
 
     private static class Node {
