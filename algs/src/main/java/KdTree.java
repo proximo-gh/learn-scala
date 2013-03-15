@@ -124,7 +124,7 @@ public class KdTree {
     private Point2D nearest(Node node, Point2D p, double x, double y, Point2D min, double minDistance) {
         if (node == null)
             return min;
-
+        new RectHV(0, 0, 0, 0).distanceSquaredTo(p);
         Point2D best = min;
         double bestDistance = minDistance;
 
