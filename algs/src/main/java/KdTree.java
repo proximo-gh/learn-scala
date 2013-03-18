@@ -118,14 +118,48 @@ public class KdTree {
 
     // a nearest neighbor in the set to p; null if set is empty
     public Point2D nearest(Point2D p) {
-        if (root == null)
-            return null;
-
-        return find(p, root, root.value, p.distanceSquaredTo(root.value));
+        return nearest(root, p, p.x(), p.y(), null, Double.POSITIVE_INFINITY);
     }
 
-    private Point2D find(Point2D p, Node node, Point2D min, double minDistance) {
-        return min;
+    private Point2D nearest(Node node, Point2D p, double x, double y, Point2D min, double minDistance) {
+        if (node == null)
+            return min;
+        new RectHV(0, 0, 0, 0).distanceSquaredTo(p);
+        Point2D best = min;
+        double bestDistance = minDistance;
+
+        double d = node.value.distanceSquaredTo(p);
+        if (best == null || d < bestDistance) {
+            bestDistance = d;
+            best = node.value;
+
+            if (bestDistance == 0)
+                return best;
+        }
+
+        double dx;
+
+        if (node.comparator == Point2D.X_ORDER)
+            dx = node.x - x;
+        else
+            dx = node.y - y;
+
+        double dx2 = dx * dx;
+
+        Point2D bestChild = nearest(dx > 0 ? node.left : node.right, p, x, y, best, bestDistance);
+
+        if (best != bestChild) {
+            bestDistance = bestChild.distanceSquaredTo(p);
+            best = bestChild;
+        }
+
+        if (dx2 < bestDistance)
+            bestChild = nearest(dx > 0 ? node.right : node.left, p, x, y, best, bestDistance);
+
+        if (best != bestChild)
+            return bestChild;
+
+        return best;
     }
 
     private static class Node {
@@ -133,10 +167,14 @@ public class KdTree {
         private Comparator<Point2D> comparator;
         private Node left;
         private Node right;
+        private double x;
+        private double y;
 
         private Node(Point2D value, Comparator<Point2D> comparator) {
             this.value = value;
             this.comparator = comparator;
+            x = value.x();
+            y = value.y();
         }
 
         @Override
